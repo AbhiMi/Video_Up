@@ -8,7 +8,7 @@
         div h3 {
             width: 140px;
             margin-top: -30px;
-            margin-left: 50px;
+            margin-left: 50px;  
         }
 
         .label {

@@ -1,0 +1,557 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="RADVupTiles.master.cs" Inherits="Droptiles" %>
+
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+
+<!DOCTYPE html>
+<script runat="server">
+
+    protected void Unnamed_Click(object sender, EventArgs e)
+    {
+
+    }
+</script>
+
+<html>
+<head runat="server">
+    <meta charset="UTF-8" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>Video-Up</title>
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/droptiles.css?v=14">
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <asp:PlaceHolder runat="server">
+        <%--<%: Scripts.Render("~/bundles/modernizr") %> --%>
+    </asp:PlaceHolder>
+    <%--<webopt:BundleReference runat="server" Path="~/Content/css" />--%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+        <!-- Prefixfree -->
+        <script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
+    </asp:ContentPlaceHolder>
+    <link href="css/Loginstyle.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="css/Loginslide.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="css/AssociationStyle.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/Sliderstyle2.css" />
+    <script type="text/javascript" src="js/jquery.cslider.js"></script>
+    <script src="js/slide.js"></script>
+    <style>
+        .icon-Feedback {
+            background-position: -73px 0px;
+        }
+
+        .Story {
+            visibility: hidden;
+        }
+
+        .companyName {
+            background: none !important;
+            font: 85%/0.9 arial, helvetica, sans-serif !important;
+            margin-top: 10px;
+        }
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */ /* Location of the box */
+            top: 100px;
+            width: 600px; /* Full width */
+            height: 500px; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(233, 233, 233, 1); /* Black w/ opacity */
+            border: 2px solid #888;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: rgba(233, 233, 233, 1);
+            margin: auto;
+            padding: 20px;
+            border-bottom: 2px solid #888;
+            width: 95%%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        #myBtn {
+            position: relative;
+            top: 10px;
+            left: 36%;
+            z-index: 9999;
+            background: #1b1b1b;
+            color: white;
+            border: none;
+        }
+        input[type="text"]{
+            width:260px;
+        }
+    </style>
+    <script>
+        //$(document).ready(function () {
+        //    a = document.getElementById("loginButton");
+        //    // a.style.display = "none";
+
+        //});
+        function hideLogin() {
+            var a = document.getElementById("loginButton");
+            //alert(a);
+            a.style.display = "none";
+        }
+        function OpenPopup() {
+            window.open("Feedback.aspx",
+                "Feedback",
+                "menubar=1,resizable=0,scrollbars=yes,width=650,height=580,toolbar=no, scrollbars=no");
+        }
+        function ShowTogglePopup() {
+            $("div#panel").slideDown("slow");
+            $("div#panel").css({ "height": "400px" });
+            $("div#toppanel").css({ "height": "580px" });
+            $("div#menu").css({ "height": "200px" });
+            $(".registerContent").css({ "display": "none" });
+            $(".loginContent").css({ "display": "block" });
+            if (document.getElementById("ctl00_body_txtUserName").value == '' || document.getElementById("ctl00_body_txtPassword").value == '') {
+                alert('Please enter User Name and Password to login. ');
+                document.getElementById("ctl00_body_txtUserName").focus();
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        $(function () {
+            $('#da-slider').cslider({
+                autoplay: true,
+                bgincrement: 450,
+                interval: 8000
+            });
+        });
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        var btn = document.getElementById("myBtn");
+
+        // Get the button that opens the modal
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        function showModal() {
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        document.getElementsByClassName("close")[0].onclick = function () {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                document.getElementById('myModal').style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="myBtn" onclick="showModal()">Schedule Demo</button>
+    <form runat="server">
+        <div id="navbar" class="navbar navbar-fixed-top navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="nav-collapse collapse">
+                        <ul class="nav" style="float: left;">
+                            <li style="margin-top: 10px; margin-left: -20px">
+                                <asp:Label ID="lblVUPLogoText" runat="server" ForeColor="#FFFFFF" Font-Size="20px" Text="Video-Up" /></li>
+                            <li class="active" style="color: #1b1b1b !important">
+                                <a class="" href="../../Default.aspx" style="margin-left: 10px"><sub><sub>v-0.9.5</sub></sub></a>
+                            </li>
+                            <li class="Story active" style="color: #1b1b1b !important">
+                                <a class="" href="../../Default.aspx" style="margin-left: 10px">How it works</a>
+                            </li>
+                            <li class="Story active" style="color: #1b1b1b !important">
+                                <a class="" href="../../Default.aspx" style="margin-left: 10px">About Us</a>
+                            </li>
+                            <li class="Story active" style="color: #1b1b1b !important"></li>
+                        </ul>
+                        <!-- The Modal -->
+                        <div id="myModal" class="modal">
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <h2 style="font-weight: bold">Schedule Demo</h2>
+                                <span class="close" style="margin-top:-15px;color:red">&times;</span>
+                                <div style="float: left; width: 65%" class="RADCycle">
+                                    <table border="0" style="width: 409px; margin: 40px">
+                                        <tr>
+                                            <td>
+                                                <asp:Label ID="Label1" runat="server" Text="Name*"></asp:Label><br />
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtName" runat="server" ValidationGroup="contact"></asp:TextBox><br />
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
+                                                    ControlToValidate="txtName"></asp:RequiredFieldValidator>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:Label ID="lblCompany" runat="server" Text="Company*"></asp:Label><br />
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtCompany" runat="server" ValidationGroup="contact"></asp:TextBox><br />
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*"
+                                                    ControlToValidate="txtCompany"></asp:RequiredFieldValidator>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:Label ID="lblCompanySiteUrl" runat="server" Text="Company SiteUrl*"></asp:Label><br />
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtCompanySiteUrl" runat="server" ValidationGroup="contact"></asp:TextBox><br />
+                                                <br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:Label ID="lblSubject" runat="server" Text="Subject*"></asp:Label><br />
+                                            </td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlSubject" runat="server" Width="270px" Height="35px" >
+                                                    <asp:ListItem Text="I want someone to call / contact me" Value="0" Selected="True" />
+                                                    <asp:ListItem Text="I got a question" Value="1" />
+                                                    <asp:ListItem Text="Learn more about Video-Up" Value="2" />
+                                                </asp:DropDownList><br />
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
+                                                    ControlToValidate="ddlSubject"></asp:RequiredFieldValidator>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:Label ID="lblContactNo" runat="server" Text="ContactNo*"></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtContactNo" runat="server"></asp:TextBox><br />
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*"
+                                                    ControlToValidate="txtContactNo"></asp:RequiredFieldValidator>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:Label ID="lblOfficeExtn" runat="server" Text="Office Contact "></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtOfficeExtn" runat="server"></asp:TextBox><br />
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*"
+                                                    ControlToValidate="txtOfficeExtn"></asp:RequiredFieldValidator>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:Label ID="lblEmail" runat="server" Text="Email*"></asp:Label><br />
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox><br />
+                                                <asp:RegularExpressionValidator ID="valRegEx" runat="server"
+                                                    ControlToValidate="txtEmail"
+                                                    ValidationExpression=".*@.*\..*"
+                                                    ErrorMessage="*Invalid Email address."
+                                                    Display="dynamic">
+                                                </asp:RegularExpressionValidator>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*"
+                                                    ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <asp:Button ID="btnSend" runat="server" Text="Schedule Demo" OnClick="btnSend_Click" CssClass="button" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Green"></asp:Label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="toppanel">
+                            <div id="panel">
+                                <div id="menu">
+                                    <div class="content clearfix">
+                                        <div class="left">
+                                            <telerik:RadScriptManager ID="RadScriptManager1" runat="server"></telerik:RadScriptManager>
+                                            <asp:HiddenField runat="server" ID="hdnIsAuthenticated" />
+                                            <table class="loginContent">
+                                                <tr>
+                                                    <td>
+                                                        <h1>Member Login</h1>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:TextBox ID="txtUserName" runat="server" CssClass="field" placeholder="Username"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:TextBox ID="txtPassword" CssClass="field" runat="server" TextMode="Password" placeholder="Password"></asp:TextBox></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="float: left">
+                                                        <label style="font-family: 'Century Gothic';">
+                                                            <input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" />
+                                                            &nbsp;Remember me</label>
+                                                    </td>
+                                                    <td style="float: right; margin: -40px 20px 0 0">
+                                                        <a class="lost-pwd" href="#" style="margin-bottom: 10px; font-family: 'Century Gothic';">Lost your password?</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;
+                                            <asp:Button ID="LoginButton" OnClick="LoginButton_Click" runat="server" CssClass="bt_login" Text="Login" OnClientClick="return ShowTogglePopup()" />
+                                                    </td>
+                                                </tr>
+                                                <div class="clear"></div>
+                                            </table>
+                                            <table class="registerContent">
+                                                <tr>
+                                                    <td>
+                                                        <h1>Register</h1>
+                                                        <br />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="UserName" placeholder="User Name" Width="256px"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName" ErrorMessage="User Name is required." ValidationGroup="RegisterUser" ToolTip="User Name is required." ID="UserNameRequired" ForeColor="Red">*</asp:RequiredFieldValidator>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:TextBox runat="server" TextMode="Password" ID="Password" placeholder="Password" Width="256px"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" ErrorMessage="Password is required." ValidationGroup="RegisterUser" ToolTip="Password is required." ID="PasswordRequired" ForeColor="Red">*</asp:RequiredFieldValidator>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:TextBox runat="server" TextMode="Password" ID="ConfirmPassword" placeholder="Confirm Password" Width="256px"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="ConfirmPassword" ErrorMessage="Confirm Password is required." ValidationGroup="RegisterUser" ToolTip="Confirm Password is required." ID="ConfirmPasswordRequired" ForeColor="Red">*</asp:RequiredFieldValidator>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="Email" placeholder="E-mail" Width="256px"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="Email" ErrorMessage="E-mail is required." ValidationGroup="RegisterUser" ToolTip="E-mail is required." ID="EmailRequired" ForeColor="Red">*</asp:RequiredFieldValidator>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <asp:CompareValidator runat="server" ControlToCompare="Password" ControlToValidate="ConfirmPassword" ErrorMessage="The Password and Confirmation Password must match." Display="Dynamic" ValidationGroup="RegisterUser" ID="PasswordCompare" ForeColor="Red"></asp:CompareValidator>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center" colspan="2" style="color: Red;">
+                                                        <asp:Literal runat="server" ID="ErrorMessage" EnableViewState="False"></asp:Literal>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="txtCompanyCode" placeholder="Company Code" Width="256px"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="txtCompanyCode" ErrorMessage="CompanyCode is required." ValidationGroup="RegisterUser" ToolTip="Company Code is required." ID="RequiredFieldValidator1" ForeColor="Red">*</asp:RequiredFieldValidator>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <br />
+                                                        <div class="g-recaptcha" data-sitekey="6Lfc6RwUAAAAAMkcUCmZb5cz9SLnQcSM9iDPumaT"></div>
+                                                        <%--<asp:TextBox ID="CaptchaCode" runat="server" placeholder="Captcha Text" Width="256px" BackColor="White"  />
+                                            <asp:Label ID="CaptchaErrorLabel" runat="server" ForeColor="Red" />--%>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Button ID="btnRegister" OnClick="btnRegister_Click" runat="server" CssClass="bt_login" Text="Register"
+                                                            OnClientClick="return showRegisterTogglePopup()" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <div class="clear"></div>
+                                            <telerik:RadWindow RenderMode="Lightweight" runat="server" ID="RadWindow_NavigateUrl" NavigateUrl="~/Pages/Create/CreateNewUser.aspx"
+                                                Modal="true" InitialBehaviors="Maximize" RestrictionZoneID="NavigateUrlZone" Width="100px">
+                                            </telerik:RadWindow>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab">
+                                <ul class="login">
+                                    <li class="companyName">
+                                        <asp:Label ID="lblCompanyName" runat="server" ForeColor="#FFFFFF" Font-Size="20px" Text="" /></li>
+                                    <li class="left">&nbsp;</li>
+                                    <li>
+                                        <asp:Label ID="lblWelcome" runat="server" ForeColor="#FFFFFF" Font-Size="14px" /></li>
+                                    <li class="sep">|</li>
+                                    <li class="toggle">
+                                        <a id="open" class="open" href="#" style="width: 40px">Log In</a>
+                                        <a id="close" class="topclose" style="display: none;" href="#">Close Panel</a>
+                                    </li>
+                                    <li class="toggle">
+                                        <a id="register" class="register" href="#" style="margin-top: 2px">Register</a>
+                                    </li>
+                                    <li><a id="btnlogout" style="display: none;" href="/Pages/Logout.ashx">Log Out</a></li>
+                                    <li class="right">&nbsp;</li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="start" style="align-content: center;">
+            <%--<asp:Label ID="userCompany" runat="server"></asp:Label>--%>
+        </div>
+
+        <div id="user" data-bind="with: user" onclick="ui.settings()">
+            <%-- <div id="name">
+                <div id="firstname" data-bind="text: firstName">
+                    <asp:Label runat="server" ID="lblFirstName" ForeColor="#808080" Font-Bold="true"></asp:Label>
+                </div>
+                <div id="lastname" data-bind="text: lastName">
+                    <asp:Label runat="server" ID="lblEmail" ForeColor="#808080"></asp:Label>
+                </div>
+            </div>--%>
+            <%--            <div id="photo">
+                <img src="../../img/User No-Frame.png" data-bind="attr: { src: photo }" width="40" height="40" />
+            </div>--%>
+        </div>
+        <div id="browser_incompatible" class="alert">
+            <button class="close" data-dismiss="alert">×</button>
+            <strong>Warning!</strong>
+            Your browser is incompatible with VUP Tiles. Please use Internet Explorer 9+, Chrome, Firefox or Safari.
+        </div>
+        <div id="CombinedScriptAlert" class="alert">
+            <button class="close" data-dismiss="alert">×</button>
+            <strong>Warning!</strong>
+            Combined javascript files are outdated. 
+                Please retun the js\Combine.bat file. 
+                Otherwise it won't work when you will deploy on a server.
+        </div>
+        <br />
+        <br />
+        <br />
+
+        <%--<asp:ScriptManager runat="server">
+            <Scripts>--%>
+        <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+        <%--Framework Scripts--%>
+        <%--<asp:ScriptReference Name="MsAjaxBundle" />--%>
+        <%--<asp:ScriptReference Name="jquery" />
+            <asp:ScriptReference Name="bootstrap" />
+            <asp:ScriptReference Name="respond" />--%>
+        <%--<asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <%-- <asp:ScriptReference Name="WebFormsBundle" />--%>
+        <%--Site Scripts--%>
+        <%--</Scripts>
+        </asp:ScriptManager>--%>
+        <asp:ContentPlaceHolder ID="body" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+
+<% if (Request.IsLocal)
+    { %>
+<!-- 
+    If you change any of the below javascript files, make sure you run the Combine.bat
+    file in the /js folder to generate the CombinedDashboard.js file again. And then don't
+    forget to update the ?v=14#. Otherwise user's will have cached copies in their browser
+    and won't get the newly deployed file. -->
+
+<%--<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>--%>
+<script ytpe="text/javascript" src="js/jquery-ui-1.10.2.custom.min.js"></script>
+<script type="text/javascript" src="js/jQueryEnhancement.js"></script>
+<script type="text/javascript" src="js/jQuery.MouseWheel.js"></script>
+<script type="text/javascript" src="js/jquery.kinetic.js"></script>
+<script type="text/javascript" src="js/Knockout-2.1.0.js"></script>
+<script type="text/javascript" src="js/knockout.sortable.js"></script>
+<script type="text/javascript" src="js/cookie.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/Underscore.js"></script>
+<script type="text/javascript" src="js/Underscore.string.js"></script>
+<script type="text/javascript" src="js/jQuery.hashchange.js"></script>
+<script type="text/javascript" src="js/User.js"></script>
+<script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
+<% }
+    else
+    { %>
+<script type="text/javascript" src="js/Combined.js?v=14"></script>
+<% } %>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.dropdown-toggle').dropdown();
+    });
+</script>
+
+<% if (SecurityContextManager.IsAnonymous(Context))
+    { %>
+<script type="text/javascript">
+    window.currentUser = new User({
+        firstName: "None",
+        lastName: "Anonymous",
+        isAnonymous: true
+    });
+</script>
+<% }
+    else
+    { %>
+
+<% } %>
+
+<asp:contentplaceholder id="scripts" runat="server"> 
+    </asp:contentplaceholder>
+
+<%--<script type="text/ecmascript">
+        
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-33406100-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>--%>
+</html>

@@ -1,0 +1,126 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="VideoUp.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Video-Up Official Website - Upload & Share your Videos.</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %> 
+    </asp:PlaceHolder>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+
+
+</head>
+<body style="background: linear-gradient(to right,#ddd 10%,#fff 50%,#ddd 90%)">
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container" style="max-width: 100%; padding-left: 20px">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <%--<a class="navbar-brand" runat="server" href="~/">Video-Up</a>--%>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/Account/Login">Log in</a></li>
+                                <asp:Label ID="lblCurrentUser" runat="server" />
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <ul class="nav navbar-nav">
+                                <li><a runat="server" href="~/Default">Video-Up</a></li>
+                                <li><a runat="server" href="~/About">About</a></li>
+                                <li><a runat="server" href="~/Contact">Contact</a></li>
+                                <li><a runat="server" href="~/UploadMediaLibrary">Upload Videos</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes1">Create <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" aria-labelledby="themes">
+                                        <li><a runat="server" href="~/CreateCompany.aspx">Company</a></li>
+                                        <li><a runat="server" href="~/Master/CreateStore.aspx">Store</a></li>
+                                        <li><a runat="server" href="~/Master/CreatePlayList.aspx">PlayList</a></li>
+                                        <li><a runat="server" href="~/Master/CreateCampaign.aspx">Campaign</a></li>
+                                        <li><a runat="server" href="~/Master/CreateChannel.aspx">Channel</a></li>
+                                        <li><a runat="server" href="~/Master/RADDevice.aspx">RAD Device</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes2">Associate <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" aria-labelledby="themes">
+                                        <li><a runat="server" href="~/AssociationViews/MediaPlaylistAssociation.aspx">Media to Playlist</a></li>
+                                        <li><a runat="server" href="~/AssociationViews/PlayListCampaignAssociation.aspx">Playlist to Campaign</a></li>
+                                        <li><a runat="server" href="~/AssociationViews/CampaignChannelAssociation.aspx">Campaign to Channel</a></li>
+                                        <li><a runat="server" href="~/Roles/UserCompanyAssociation.aspx">User & Company</a></li>
+                                        <li><a runat="server" href="~/AssociationViews/RADDeviceChannelAssociation.aspx">RAD Device to Channel</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown"><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %>!</a></li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Roles <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" aria-labelledby="themes">
+                                        <li><a runat="server" href="~/Roles/ManageRoles.aspx">Manage Roles</a></li>
+                                        <li><a runat="server" href="~/Roles/UsersAndRoles.aspx">Users & Roles</a></li>
+                                        <li><a runat="server" href="~/Account/Register.aspx">Associate User to Company</a></li>
+                                        <li><a runat="server" href="~/Roles/MultipleUserRoleEdit.aspx">Manage User Permission</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/Account/Login" OnLoggingOut="Unnamed_LoggingOut" />
+                                </li>
+                            </ul>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content" style="max-width: 100%; padding: 20px">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+        </div>
+        <footer style="width: 100%; background: linear-gradient(to bottom,grey 10%, black 50%); border-color: #080808; min-height: 30px; color: white; padding: 5px 0 0 20px">
+            <p>&copy; <%: DateTime.Now.Year %> - Video-Up Website</p>
+            <p style="text-align: right">
+                <asp:Label ID="lblCompanyName" runat="server"></asp:Label>
+            </p>
+        </footer>
+    </form>
+</body>
+</html>

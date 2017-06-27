@@ -1,0 +1,168 @@
+﻿div h3 {
+        width: 140px;
+        margin-top: -30px;
+        margin-left: 50px;
+    }
+.label {
+    font-style: normal;
+}
+
+.breadcrumb {
+    min-height: 475px !important;
+    margin-top: 350px !important;
+    display: none;
+}
+
+#footer, #footer a {
+    width: 100%;
+}
+
+.siteMapImage {
+    float: left;
+    margin-top: -35px;
+    margin-left: 20px;
+}
+
+.SiteMap {
+    float: right;
+}
+
+.lblTitle,.lblSelectedCampaign {
+    margin-top: 10px;
+    margin-left:20px;
+    color: #343553;
+    font-size:2.1em;
+    text-shadow:2px 2px 3px #808080;
+}
+.lblSelectedCampaign {
+    color: #789DE7;
+}
+.marginLeft415 {
+    margin-left:415px;
+}
+.leftNavigation {
+    float: left;
+    margin-top: 280px;
+    margin-left: -400px;
+    border: 3px solid gray;
+    border-radius: 10px;
+    width: 300px;
+    padding: 20px 20px 10px 20px;
+}
+
+    .leftNavigation td {
+        width: 265px;
+    }
+
+    .leftNavigation a {
+        text-shadow:2px 2px 3px #808080;
+        margin-left: 10px;
+        font-size: 18px !important;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+
+        .leftNavigation a:hover {
+            font-weight: bold;
+        }
+        .sidebarActiveLink{
+            color:Green;
+        }
+.hidden {
+    display: none;
+}
+
+.sideBar a:hover {
+    background-color: green;
+}
+
+.h3 {
+    margin-top: -20px;
+}
+.RADCycle {
+    background: url("/img/RAD_Cycle_DC.gif") no-repeat;
+    width: 350px;
+    height:350px;
+    margin-left:20px;
+    margin-top:-95px;
+}
+#radList {
+    position: relative;
+}
+
+#radList li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+}
+
+#radList li, #radList a {
+    height: 80px;
+    display: block;
+}
+
+#designCampaign {
+    left: 107px;
+    top: 10px;
+    width: 80px;
+    /*background:url("../img/RADCycle_Home.gif") no-repeat 0 100px;*/
+}
+#designCampaign a:hover {
+    width: 180px;
+    background: url("../img/RADCycle_Hover.gif") 450px -16px;
+}
+#uploadMedia {
+    width: 80px;
+    left: 215px;
+    top: 60px;
+}
+#uploadMedia a:hover {
+    width: 180px;
+    background: url("../img/RADCycle_Hover.gif") 953px -123px;
+}
+#customizePlaylist {
+        left: 242px;
+    top: 175px;
+    width: 80px;
+    background: url("../img/RADCycle_Home.gif") -530px -332px;
+}
+#customizePlaylist a:hover {
+    width: 180px;
+    background: url("../img/RADCycle_Hover.gif") 901px -338px;
+}
+#previewCampaign {
+        top: 270px;
+        left: 170px;
+        width: 80px;
+}
+#previewCampaign a:hover {
+    width: 180px;
+    background: url("../img/RADCycle_Hover.gif") 1051px -522px;
+}
+#ScheduleChannel {
+        top: 270px;
+    left: 49px;
+    width: 80px;
+}
+    #ScheduleChannel a:hover {
+    width: 180px;
+    background: url("../img/RADCycle_Hover.gif") 568px -519px;
+}
+#goLive {
+        top: 175px;
+    left: -26px;
+    width: 80px;
+}
+#goLive a:hover {
+    width: 180px;
+    background: url("../img/RADCycle_Hover.gif") 712px -333px;
+}
+#accessPerformance {
+    top: 60px;
+    left: 2px;
+    width: 80px;
+}
+    #accessPerformance a:hover {
+    width: 180px;
+    background: url("../img/RADCycle_Hover.gif") 667px -106px;
+}

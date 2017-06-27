@@ -1,0 +1,36 @@
+/*
+Default style definitions for:
+
+Uploadify v1.6.2
+Copyright (C) 2009 by Ronnie Garcia
+Co-developed by Travis Nickels
+*/
+.fileUploadQueueItem {
+	font: 12px Verdana, Geneva, sans-serif;
+	/*background-color: #F5F5F5;*/
+    background: linear-gradient(to right,grey 50%, black 90%);
+	border: 3px solid #E5E5E5;
+	margin-top: 5px;
+	padding: 10px;
+	width: 400px;
+    color:#FFFFFF;
+    border-radius:9px;
+}
+.fileUploadQueueItem .cancel {
+	float: right;
+}
+.fileUploadProgress {
+    border-radius:5px;
+    min-height:10px;
+	background-color: #FFFFFF;
+	border-top: 1px solid #808080;
+	border-left: 1px solid #808080;
+	border-right: 1px solid #C5C5C5;
+	border-bottom: 1px solid #C5C5C5;
+	margin-top: 10px;
+	width: 100%;
+}
+.fileUploadProgressBar {
+    min-height:10px;
+	background-color: #3c0;
+}

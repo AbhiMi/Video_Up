@@ -1,0 +1,105 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RADBusinessLogicLayer", "RADBusinessLogicLayer\RADBusinessLogicLayer.csproj", "{0D3C1166-375F-422E-88C7-1F7793643883}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RADCommonServices", "RADCommonServices\RADCommonServices.csproj", "{F7172985-62B0-4D31-8313-C4367A11D19A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RADDataAccessLayer", "RADDataAccessLayer\RADDataAccessLayer.csproj", "{B672D2C2-93FB-49BF-9FA4-F8721AD358D4}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "RADCommandSuite(3)", "http://localhost:64560", "{75FD21B0-F554-4E12-A89D-048897BE45DA}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{f7172985-62b0-4d31-8313-c4367a11d19a}|RADCommonServices.dll;{0d3c1166-375f-422e-88c7-1f7793643883}|RADBusinessLogicLayer.dll;{B672D2C2-93FB-49BF-9FA4-F8721AD358D4}|RADDataAccessLayer.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_64560"
+		Debug.AspNetCompiler.PhysicalPath = "RADCommandSuite\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64560\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_64560"
+		Release.AspNetCompiler.PhysicalPath = "RADCommandSuite\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64560\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "RADCommandSuite\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RADMediaService", "RADMediaService\RADMediaService.csproj", "{01E0B71B-40A2-4735-9D39-5F7ABAFBA444}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RADVideoConverter", "RADVideoConverter\RADVideoConverter.csproj", "{C91F9DCE-EEDD-4984-A40B-F74548AA9D2F}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "RADVupTiles", "http://localhost:50053", "{0526CFF5-10FF-456A-82B1-23DED377B723}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{0d3c1166-375f-422e-88c7-1f7793643883}|RADBusinessLogicLayer.dll;{F7172985-62B0-4D31-8313-C4367A11D19A}|RADCommonServices.dll;{B672D2C2-93FB-49BF-9FA4-F8721AD358D4}|RADDataAccessLayer.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50053"
+		Debug.AspNetCompiler.PhysicalPath = "RADVupTiles\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50053\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50053"
+		Release.AspNetCompiler.PhysicalPath = "RADVupTiles\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50053\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "RADVupTiles\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchedulerServiceApplication", "SchedulerServiceApplication\SchedulerServiceApplication.csproj", "{0EDE2377-81FC-4E08-ABE2-49F3B2080E02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D3C1166-375F-422E-88C7-1F7793643883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D3C1166-375F-422E-88C7-1F7793643883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D3C1166-375F-422E-88C7-1F7793643883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D3C1166-375F-422E-88C7-1F7793643883}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7172985-62B0-4D31-8313-C4367A11D19A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7172985-62B0-4D31-8313-C4367A11D19A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7172985-62B0-4D31-8313-C4367A11D19A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7172985-62B0-4D31-8313-C4367A11D19A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B672D2C2-93FB-49BF-9FA4-F8721AD358D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B672D2C2-93FB-49BF-9FA4-F8721AD358D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B672D2C2-93FB-49BF-9FA4-F8721AD358D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B672D2C2-93FB-49BF-9FA4-F8721AD358D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75FD21B0-F554-4E12-A89D-048897BE45DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75FD21B0-F554-4E12-A89D-048897BE45DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75FD21B0-F554-4E12-A89D-048897BE45DA}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{75FD21B0-F554-4E12-A89D-048897BE45DA}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{01E0B71B-40A2-4735-9D39-5F7ABAFBA444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01E0B71B-40A2-4735-9D39-5F7ABAFBA444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01E0B71B-40A2-4735-9D39-5F7ABAFBA444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01E0B71B-40A2-4735-9D39-5F7ABAFBA444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C91F9DCE-EEDD-4984-A40B-F74548AA9D2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C91F9DCE-EEDD-4984-A40B-F74548AA9D2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C91F9DCE-EEDD-4984-A40B-F74548AA9D2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C91F9DCE-EEDD-4984-A40B-F74548AA9D2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0526CFF5-10FF-456A-82B1-23DED377B723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0526CFF5-10FF-456A-82B1-23DED377B723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0526CFF5-10FF-456A-82B1-23DED377B723}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{0526CFF5-10FF-456A-82B1-23DED377B723}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{0EDE2377-81FC-4E08-ABE2-49F3B2080E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EDE2377-81FC-4E08-ABE2-49F3B2080E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EDE2377-81FC-4E08-ABE2-49F3B2080E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EDE2377-81FC-4E08-ABE2-49F3B2080E02}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

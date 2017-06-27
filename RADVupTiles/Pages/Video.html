@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript">
+        var videoSource = new Array();
+        videoSource[0] = 'video/video.m4v';
+        videoSource[1] = 'video/BigBuck.m4v';
+        var videoCount = videoSource.length;
+
+        document.getElementById("myVideo").setAttribute("src", videoSource[0]);
+
+        function videoPlay(videoNum) {
+            document.getElementById("myVideo").setAttribute("src", videoSource[videoNum]);
+            document.getElementById("myVideo").load();
+            document.getElementById("myVideo").play();
+        }
+
+        document.getElementById('myVideo').addEventListener('ended', myHandler, false);
+        function myHandler() {
+            i++;
+            if (i == (videoCount - 1)) {
+                i = 0;
+                videoPlay(i);
+            }
+            else {
+                videoPlay(i);
+            }
+
+        }
+    </script>
+
+</head>
+<body>
+    <video controls id="myVideo"></video>
+</body>
+</html>

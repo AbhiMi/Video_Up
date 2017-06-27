@@ -1,0 +1,518 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/RADVupTiles.master" AutoEventWireup="true" CodeFile="LeftNavigationWizard.aspx.cs" Inherits="LeftNavigationWizard" EnableEventValidation="false" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <link href="css/demo_style.css" rel="stylesheet" />
+    <link href="css/smart_wizard_vertical.css" rel="stylesheet" />
+    <script src="js/jquery-1.4.2.min.js"></script>
+    <script src="js/jquery.smartWizard-2.0.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Carrois+Gothic+SC' rel='stylesheet' type='text/css'>
+    <link href="../../css/AssociationStyle.css" rel="stylesheet" />
+    <style>
+        div h3 {
+            width: 140px;
+            margin-top: -30px;
+            margin-left: 50px;
+        }
+
+        .label {
+            font-style: normal;
+        }
+
+        .breadcrumb {
+            min-height: 475px !important;
+            margin-top: 350px !important;
+            display: none;
+        }
+
+        #footer, #footer a {
+            width: 100%;
+        }
+
+        .FixedHeader {
+            border: none;
+            font-size: 1.1em;
+            border-color: #ef7c31;
+            background-color: #ef7c31;
+        }
+
+        .siteMapImage {
+            float: left;
+            margin-top: -35px;
+            margin-left: 20px;
+        }
+
+        .SiteMap {
+            float: right;
+        }
+
+        .lblTitle, .lblSelectedCampaign {
+            margin-top: 40px;
+            margin-left: 20px;
+            color: #808080;
+            font-size: 1.2975rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: 'Carrois Gothic SC', sans-serif;
+            /*text-shadow:2px 2px 3px #808080;*/
+        }
+
+        .marginLeft415 {
+            margin-left: 415px;
+        }
+
+        .leftNavigation {
+            float: left;
+            margin-top: 300px;
+            margin-left: -390px;
+            /*border: 3px solid gray;*/
+            /*border-radius: 10px;*/
+            width: 350px;
+            padding: 20px 0px 10px 0px;
+            background-color: lightgray;
+            text-align: center;
+        }
+
+            .leftNavigation td {
+                width: 350px;
+            }
+
+                .leftNavigation td:hover {
+                    width: 350px;
+                    background-color: #ef7c31;
+                    color: #FFFFFF !important;
+                    padding: 5px 0 5px 0px;
+                }
+
+            .leftNavigation a {
+                /*text-shadow:2px 2px 3px #808080;*/
+                margin-left: 10px;
+                font-size: 1.125rem !important;
+                font-family: 'Carrois Gothic SC', sans-serif;
+                color: #808080 !important;
+                width: 350px;
+            }
+
+                .leftNavigation a:active {
+                    color: gray !important;
+                }
+
+                .leftNavigation a:hover {
+                    font-weight: bold;
+                    font-size: 1.2825rem !important;
+                    text-transform: uppercase;
+                    color: #FFFFFF !important;
+                    text-decoration: none;
+                }
+
+        .sidebarActiveLink {
+            color: #49494a;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .sideBar a:hover {
+            background-color: #49494a;
+        }
+
+        .h3 {
+            margin-top: -20px;
+        }
+
+        .RADCycle {
+            background: url("img/Mini-RADCycle.jpg") no-repeat;
+            width: 350px;
+            height: 350px;
+            margin-left: 20px;
+            margin-top: -20px;
+        }
+
+        #radList {
+            position: relative;
+        }
+
+            #radList li {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                position: absolute;
+            }
+
+            #radList li, #radList a {
+                height: 80px;
+                display: block;
+            }
+
+        #designCampaign {
+            left: 107px;
+            top: 10px;
+            width: 80px;
+            /*background:url("../img/RADCycle_Home.gif") no-repeat 0 100px;*/
+        }
+
+            #designCampaign a:hover {
+                width: 180px;
+                background: url("../img/RADCycle_Hover.gif") 450px -16px;
+            }
+
+        #uploadMedia {
+            width: 80px;
+            left: 215px;
+            top: 60px;
+        }
+
+            #uploadMedia a:hover {
+                width: 180px;
+                background: url("../img/RADCycle_Hover.gif") 953px -123px;
+            }
+
+        #customizePlaylist {
+            left: 242px;
+            top: 175px;
+            width: 80px;
+            background: url("../img/RADCycle_Home.gif") -530px -332px;
+        }
+
+            #customizePlaylist a:hover {
+                width: 180px;
+                background: url("../img/RADCycle_Hover.gif") 901px -338px;
+            }
+
+        #previewCampaign {
+            top: 270px;
+            left: 170px;
+            width: 80px;
+        }
+
+            #previewCampaign a:hover {
+                width: 180px;
+                background: url("../img/RADCycle_Hover.gif") 1051px -522px;
+            }
+
+        #ScheduleChannel {
+            top: 270px;
+            left: 49px;
+            width: 80px;
+        }
+
+            #ScheduleChannel a:hover {
+                width: 180px;
+                background: url("../img/RADCycle_Hover.gif") 568px -519px;
+            }
+
+        #goLive {
+            top: 175px;
+            left: -26px;
+            width: 80px;
+        }
+
+            #goLive a:hover {
+                width: 180px;
+                background: url("../img/RADCycle_Hover.gif") 712px -333px;
+            }
+
+        #accessPerformance {
+            top: 60px;
+            left: 2px;
+            width: 80px;
+        }
+
+            #accessPerformance a:hover {
+                width: 180px;
+                background: url("../img/RADCycle_Hover.gif") 667px -106px;
+            }
+
+        .bg-text {
+            /*background-color: #aaa;
+            overflow: hidden;
+            padding: 20px 20px 100px 20px;*/
+            position: relative;
+            margin-left: 375px;
+            /*width: 400px;*/
+            z-index: -1;
+            margin-top: 10px;
+        }
+
+            .bg-text::after {
+                color: #E0E0E0;
+                /*color:#D8D8D8;*/
+                content: attr(data-bg-text);
+                display: block;
+                font-size: 13rem;
+                line-height: 0.5;
+                position: absolute;
+            }
+
+        .swMain .stepContainer {
+            width: 730px;
+            height: 500px;
+        }
+        .content{
+            overflow-y:visible !important;
+        }
+ </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Smart Wizard	
+            $('#wizard').smartWizard({ transitionEffect: 'slide' });
+        });
+    </script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
+    <div class="bg-text" data-bg-text="Design">
+    </div>
+    <table style="margin-left: 390px">
+        <br />
+        <br />
+        <tr>
+            <%--  <td>
+                <asp:Image ID="imgDesignCampaign" runat="server" ImageUrl="~/img/DC.gif" Width="100px" Height="100px" CssClass="marginLeft415" />
+            </td>--%>
+            <td>
+                <asp:Label ID="lblTitle" runat="server" Text="Select Campaign" CssClass="lblTitle" />
+                <asp:Label ID="lblSelectedCampaign" runat="server" Text="" CssClass="lblSelectedCampaign" Visible="false" />
+            </td>
+        </tr>
+    </table>
+    <asp:HiddenField ID="hdnCampaignName" runat="server" />
+    <div style="float: left;" class="RADCycle">
+        <div class="swMain" id="wizard">
+            <ul style="margin-top:360px;margin-bottom:40px">
+                <li><a href="#step-1">
+                    <label class="stepNumber">1</label>
+                    <span class="stepDesc">Create Campaign<br />
+                        <small>This step is to create new campaign.</small>
+                    </span>
+                </a></li>
+                <li><a href="#step-2">
+                    <label class="stepNumber">2</label>
+                    <span class="stepDesc">Select Campaign<br />
+                        <small>Select the campaign to be managed.</small>
+                    </span>
+                </a></li>
+                <li><a href="#step-3">
+                    <label class="stepNumber">3</label>
+                    <span class="stepDesc">Manage Campaign<br />
+                        <small>Associate playlists to the campaign.</small>
+                    </span>
+                </a></li>
+            </ul>
+            <div style="float: right;margin-left:40px">
+                <div id="step-1">
+                    <div style="padding: 20px; margin: 60px 25px 0 0px; position: relative; background-repeat: repeat; height: 300px; width: 650px">
+                        <table id="tblCampaign" runat="server">
+                            <tr>
+                                <td style="padding-right: 20px; padding-top: 2px;">
+                                    <asp:Label ID="lblCreateCampaign" Text="Campaign Name:" runat="server" CssClass="label" />
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtCreateCampaign" runat="server" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 20px; padding-top: 2px;">
+                                    <asp:Label ID="lblUploadImage" runat="server" Text="Upload Campaign Image:" CssClass="label" />
+                                </td>
+                                <td>
+                                    <asp:FileUpload ID="imgFileUpload" runat="server" CssClass="button" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="float: left; margin-top: 10px">
+                                    <asp:Button ID="btnCreateCampaign" runat="server" Text="Create Campaign" CssClass="button" OnClick="btnCreateCampaign_Click" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:CustomValidator ID="CustomValidator1" runat="server" ClientValidationFunction="ValidateFileUpload" ErrorMessage="Invalid file type. Only .gif, .jpg, .png, .bmp and .jpeg are allowed." ControlToValidate="imgFileUpload" ValidationGroup="update">&nbsp;</asp:CustomValidator>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label ID="lblCreateCampaignStatus" runat="server" Visible="false" Font-Bold="true" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="step-2" style="min-height:500px">
+                    <table style="margin-top: 40px">
+                        <tr>
+                            <td>
+                                <asp:TextBox ID="txtChannel" runat="server" Width="160px" ClientIDMode="Static" CssClass="textbox" />
+                                <asp:Button ID="btnLoadSearchGrid" runat="server" Text="Search Campaign" OnClick="btnLoadSearchGrid_Click" CssClass="button" />
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="width: 790px; height: 330px; margin-top: 10px">
+                        <table>
+                            <tr>
+                                <td>
+                                    <asp:GridView ID="grdCampaign" runat="server" AutoGenerateColumns="false"
+                                        CellPadding="4" ForeColor="#333333" GridLines="Horizontal" DataKeyNames="CampaignID"
+                                        AllowSorting="True"
+                                        OnPageIndexChanging="grdCampaign_PageIndexChanging"
+                                        OnSelectedIndexChanged="grdCampaign_SelectedIndexChanged"
+                                        OnSorting="grdCampaign_Sorting"
+                                        OnRowCancelingEdit="grdCampaign_RowCancelingEdit"
+                                        OnRowDeleting="grdCampaign_RowDeleting"
+                                        OnRowEditing="grdCampaign_RowEditing"
+                                        OnRowUpdating="grdCampaign_RowUpdating"
+                                        OnRowCommand="grdCampaign_RowCommand"
+                                        OnRowDataBound="grdCampaign_RowDataBound"
+                                        OnRowCreated="grdCampaign_RowCreated"
+                                        CssClass="Grid" AlternatingRowStyle-CssClass="alt" PagerStyle-CssClass="pgr" HeaderStyle-CssClass="FixedHeader"
+                                        Width="750px">
+                                        <SelectedRowStyle BackColor="#cbcbcb" Font-Bold="True" ForeColor="#333333" />
+                                        <Columns>
+                                            <asp:TemplateField HeaderText="#" ItemStyle-Width="25px" ItemStyle-HorizontalAlign="Center" SortExpression="CampaignID">
+                                                <ItemTemplate>
+                                                    <span>
+                                                        <%#Container.DataItemIndex + 1%>
+                                                    </span>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="CampaignID" Visible="false" SortExpression="CampaignID">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="txtCampaignID" runat="server" Text='<%#Eval("CampaignID") %>' />
+                                                </ItemTemplate>
+                                                <EditItemTemplate>
+                                                    <asp:Label ID="lblCampaignID" runat="server" Width="40px" Text='<%#Eval("CampaignID") %>' />
+                                                </EditItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Campaign Image" ItemStyle-HorizontalAlign="Center" SortExpression="CampaignID">
+                                                <ItemTemplate>
+                                                    <asp:Image ID="imgCampaignName" runat="server" Width="20px" Height="20px" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Campaign Name" SortExpression="CampaignName">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblCampaignName" runat="server" Text='<%#Eval("CampaignName") %>' />
+                                                </ItemTemplate>
+                                                <EditItemTemplate>
+                                                    <asp:TextBox ID="txtCampaignName" Width="170px" runat="server" Text='<%#Eval("CampaignName") %>' />
+                                                </EditItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:BoundField ItemStyle-HorizontalAlign="Center" DataField="DateCreated" HeaderText="Date Created" SortExpression="DateCreated" DataFormatString="{0: dd-MMM-yy}" HtmlEncode="false" ReadOnly="true"></asp:BoundField>
+                                            <asp:BoundField ItemStyle-HorizontalAlign="Center" DataField="DateModified" HeaderText="Date Modified" SortExpression="DateModified" DataFormatString="{0: dd-MMM-yy}" HtmlEncode="false" ReadOnly="true"></asp:BoundField>
+                                            <asp:TemplateField>
+                                                <ItemStyle CssClass="floatRight" />
+                                                <EditItemTemplate>
+                                                    <asp:Button ID="ButtonUpdate" runat="server" CommandName="Update" Text="Update" CssClass="button" />
+                                                    <asp:Button ID="ButtonCancel" runat="server" CommandName="Cancel" Text="Cancel" CssClass="button" />
+                                                </EditItemTemplate>
+                                                <ItemTemplate>
+                                                    <asp:Button ID="ButtonEdit" runat="server" CommandName="Edit" Text="Edit" CssClass="button" />
+                                                    <asp:Button ID="ButtonDelete" runat="server" CommandName="Delete" Text="Delete" CssClass="button" />
+                                                    <asp:Button ID="ButtonManage" runat="server" CommandName="Manage" Text="Manage" CssClass="button" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                    <asp:Label ID="lblmsg" runat="server" Font-Bold="true"></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="step-3">
+                    <asp:HiddenField ID="hdnCampaignID" runat="server" />
+                    <table>
+                        <tr>
+                            <td>
+                                <div id="dragdrop" runat="server" style="margin-top: 50px">
+                                    <div style="float: left; width: 48%; height: 330px; padding: 10px; margin-right: 25px; background-color: #cbcbcb">
+                                        <h3 class="h3" style="width: 348px; background-color: #ef7c31; text-align: center; margin-left: -10px">Associated Playlists</h3>
+                                        <div class="content scrollbar" style="margin-bottom: 20px; min-height: 300px;">
+                                            <asp:Button ID="btnSaveOrder" Text="Save Campaign Order" runat="server" OnClick="btnSaveOrder_Click" CssClass="button marginBottom17" />
+                                            <asp:GridView ID="gvDest" GridLines="None" Visible="true" runat="server" ShowHeaderWhenEmpty="true" CssClass="drag_drop_grid Grid" AutoGenerateColumns="false"
+                                                DataKeyNames="PlayListName,PlayListID" AlternatingRowStyle-CssClass="alt" PagerStyle-CssClass="pgr"
+                                                AllowSorting="true" OnSorting="gvDest_Sorting">
+                                                <SelectedRowStyle BackColor="#cbcbcb" Font-Bold="True" ForeColor="#333333" />
+                                                <Columns>
+                                                    <asp:BoundField DataField="PlayListID" Visible="false"></asp:BoundField>
+                                                    <asp:TemplateField>
+                                                        <ItemTemplate>
+                                                            <asp:ImageButton ID="imgShow" runat="server" OnClick="imgShow_Click" ImageUrl="~/img/plus.gif" CommandArgument="Show" CssClass="paddingLeft10" />
+                                                            <asp:Panel ID="pnlMedia" runat="server" Visible="false" Style="position: relative">
+                                                                <asp:GridView ID="gvMedia" runat="server" AutoGenerateColumns="false" PageSize="5"
+                                                                    AllowPaging="true" CssClass="Grid marginLeft30" AlternatingRowStyle-CssClass="alt" PagerStyle-CssClass="pgr">
+                                                                    <Columns>
+                                                                        <asp:BoundField ItemStyle-Width="150px" DataField="Description" HeaderText="Media Name" />
+                                                                    </Columns>
+                                                                </asp:GridView>
+                                                            </asp:Panel>
+                                                        </ItemTemplate>
+                                                        <HeaderStyle BorderWidth="0px" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField>
+                                                        <ItemTemplate>
+                                                            <input type="hidden" name="AssociationId" value='<%# Eval("ID") %>' />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="" ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Image ID="imgThumbNail" runat="server" ImageUrl='<%# "~/img/" + Eval("FileName") %>' CssClass="thumbNailImage" />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:HyperLinkField runat="server" ItemStyle-Width="220px" DataTextField="PlayListName" HeaderText=""
+                                                        DataNavigateUrlFormatString="MediaToPlayList.aspx?PlayListName={0}" DataNavigateUrlFields="PlayListName" SortExpression="PlayListName" />
+                                                    <asp:TemplateField>
+                                                        <ItemTemplate>
+                                                            <asp:ImageButton ID="imgUnAssociate" runat="server" OnClick="imgUnAssociate_Click" ImageUrl="~/img/UnAssociate.png" OnClientClick="if ( ! ConfirmUnAssociate()) return false;" />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+                                        </div>
+                                    </div>
+                                    <div style="float: right; min-height: 320px; padding: 10px; width: 42%; background-color: #cbcbcb">
+                                        <h3 class="h3" style="width: 307px; background-color: #ef7c31; text-align: center; margin-left: -10px">Available Playlists</h3>
+                                        <div class="content scrollbar" style="min-height: 300px;">
+                                            <asp:Label ID="lblNote" runat="server" Text="* Please select a campaign and <br/> drag & drop to assign playlists." CssClass="label" />
+                                            <asp:GridView ID="gvSource" GridLines="None" runat="server" CssClass="drag_drop_grid Grid" AutoGenerateColumns="false"
+                                                AlternatingRowStyle-CssClass="alt" PagerStyle-CssClass="pgr" AllowSorting="true"
+                                                OnSorting="gvSource_Sorting">
+                                                <SelectedRowStyle BackColor="#cbcbcb" Font-Bold="True" ForeColor="#333333" />
+                                                <Columns>
+                                                    <asp:BoundField ItemStyle-Width="25px" ItemStyle-Height="20px" ItemStyle-HorizontalAlign="Center" DataField="PlayListID"
+                                                        HeaderText="ID" SortExpression="PlayListID"></asp:BoundField>
+                                                    <asp:TemplateField HeaderText="" ItemStyle-Width="30px" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Image ID="imgThumbNail" runat="server" ImageUrl='<%# "~/img/" + Eval("FileName") %>' CssClass="thumbNailImage" />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:BoundField ItemStyle-Width="220px" ItemStyle-HorizontalAlign="Left" DataField="PlayListName"
+                                                        HeaderText="" HeaderStyle-HorizontalAlign="Left" SortExpression="PlayListName"></asp:BoundField>
+                                                </Columns>
+                                            </asp:GridView>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <table align="center" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <!-- Tabs -->
+
+
+                <!-- End SmartWizard Content -->
+
+            </td>
+        </tr>
+    </table>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scripts" runat="Server">
+</asp:Content>
+

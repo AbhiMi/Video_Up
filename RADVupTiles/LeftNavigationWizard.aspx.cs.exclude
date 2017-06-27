@@ -1,0 +1,630 @@
+﻿using RADBusinessLogicLayer;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Script.Services;
+using System.Web.Security;
+using System.Web.Services;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class LeftNavigationWizard : System.Web.UI.Page
+{
+    public static bool isSort = false;
+    public static bool isAscend = false;
+    private const string ASCENDING = " ASC";
+    private const string DESCENDING = " DESC";
+    public static bool showImage = false;
+    string Campaign_Sort_Direction = "CampaignName ASC";
+    string AvblPlaylist_Sort_Direction = "PlayListName ASC";
+    string AssctedPlaylist_Sort_Direction = "PlayListName ASC";
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        #region ClientSideEvents
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "HideColumn", "<script language='javascript'>hideColumn();</script>");
+        #endregion
+        if (!IsPostBack)
+        {
+            ViewState["Campaign_Sort_Direction"] = Campaign_Sort_Direction;
+            ViewState["AvblPlaylist_Sort_Direction"] = AvblPlaylist_Sort_Direction;
+            ViewState["AssctedPlaylist_Sort_Direction"] = AssctedPlaylist_Sort_Direction;
+            
+            string userName = Context.User.Identity.Name;
+            if (!Roles.IsUserInRole(userName, "Guest"))
+            {
+                if (!IsPostBack)
+                {
+                    BindGrid(string.Empty);
+                }
+            }
+            else
+            {
+                tblCampaign.Visible = false;
+                BindGrid(string.Empty);
+            }
+        }
+        if (!string.IsNullOrEmpty(hdnCampaignName.Value))
+        {
+            BusinessLogic objBussLogic = new BusinessLogic();
+            int campaignId = objBussLogic.GetCampaignID(hdnCampaignName.Value);
+            hdnCampaignID.Value = Convert.ToString(campaignId);
+            LoadAssociationGrid(hdnCampaignName.Value);
+            LoadPlaylistData();
+        }
+        if (gvDest.Rows.Count == 0)
+            btnSaveOrder.Visible = false;
+        else
+            btnSaveOrder.Visible = true;
+    }
+    private DataView LoadPlaylistData()
+    {
+        DataTable dtCampaigns = GetUnAssociatedPlayLists(GetUsersCompanyID());
+        DataView dvCampaigns = dtCampaigns.DefaultView;
+        dvCampaigns.Sort = ViewState["AvblPlaylist_Sort_Direction"].ToString();
+        gvSource.DataSource = dvCampaigns;
+        gvSource.DataBind();
+        gvSource.Visible = true;
+        return dvCampaigns;
+    }
+    public DataTable GetUnAssociatedPlayLists(int CompanyId)
+    {
+        BusinessLogic objBussLogic = new BusinessLogic();
+        //DataTable dtMediaFiles = objBussLogic.GetCampaigns(GetUsersCompanyID());
+        DataTable dtMediaFiles = objBussLogic.GetUnAssociatePlaylists(GetUsersCompanyID());
+        return dtMediaFiles;
+    }
+    public DataView GetChannels(int CompanyID)
+    {
+        BusinessLogic objBussLogic = new BusinessLogic();
+        DataTable dtChannels = objBussLogic.GetChannels(GetUsersCompanyID());
+        DataView dvChannels = dtChannels.DefaultView;
+        dvChannels.Sort = ViewState["Channel_Sort_Direction"].ToString();
+        return dvChannels;
+    }
+    protected void btnCreateCampaign_Click(object sender, EventArgs e)
+    {
+        bool blnResult = false;
+        string strFileName = string.Empty;
+        string strFilePath = string.Empty;
+        string tempPath = string.Empty;
+        string savepath = string.Empty;
+        string fileName = string.Empty;
+        string filename = string.Empty;
+        if (!string.IsNullOrEmpty(txtCreateCampaign.Text))
+        {
+            if (imgFileUpload.HasFile)
+            {
+                filename = imgFileUpload.PostedFile.FileName;
+                string fullPath = Path.GetFullPath(filename);
+                string strfilename = Path.GetFileName(filename);
+                fileName = strfilename;
+
+                strFilePath = HttpContext.Current.Server.MapPath("../../img/") + filename;
+                imgFileUpload.SaveAs(strFilePath);
+            }
+            else
+            {
+                strFilePath = HttpContext.Current.Server.MapPath("../../img/") + "Default.png";
+                strFileName = "Default.png";
+            }
+            imgFileUpload.PostedFile.SaveAs(strFilePath);
+            BusinessLogic objBusinessLogic = new BusinessLogic();
+            blnResult = objBusinessLogic.CreateCampaign(txtCreateCampaign.Text, GetUsersCompanyID(), strFilePath, filename);
+            if (blnResult)
+            {
+                lblCreateCampaignStatus.Visible = true;
+                lblCreateCampaignStatus.ForeColor = Color.Green;
+                lblCreateCampaignStatus.Text = "Campaign created successfully.";
+            }
+            else
+            {
+                lblCreateCampaignStatus.Visible = true;
+                lblCreateCampaignStatus.ForeColor = Color.Red;
+                lblCreateCampaignStatus.Text = "Operation Failed. Please Contact Administrator.";
+            }
+        }
+        BindGrid(txtCreateCampaign.Text);
+    }
+    private DataView LoadAssociationGrid(string campaignName)
+    {
+        BusinessLogic objBussLogic = new BusinessLogic();
+        //DataTable dt = objBussLogic.GetCampaignChannelAssociation(GetUsersCompanyID());
+        DataTable dtAssociations = objBussLogic.GetPlayListCompanyAssociation(GetUsersCompanyID(), campaignName);
+        DataView dvAssociations = dtAssociations.DefaultView;
+        dvAssociations.Sort = ViewState["AssctedPlaylist_Sort_Direction"].ToString();
+        gvDest.DataSource = dvAssociations;
+        gvDest.DataBind();
+        gvDest.Visible = true;
+        return dvAssociations;
+    }
+
+    protected void UpdatePreference(object sender, EventArgs e)
+    {
+        BusinessLogic objBussLogic = new BusinessLogic();
+        int[] associationIds = (from p in Request.Form["AssociationId"].Split(',')
+                                select int.Parse(p)).ToArray();
+        int associationorder = 1;
+        foreach (int associationId in associationIds)
+        {
+            objBussLogic.UpdatePlaylistAssociationOrder(associationId, associationorder);
+            associationorder += 1;
+        }
+        Response.Redirect(Request.Url.AbsoluteUri);
+    }
+
+    [WebMethod]
+    [ScriptMethod]
+    public static void SavePlayList(Playlist playlist)
+    {
+        LeftNavigationWizard associate = new LeftNavigationWizard();
+
+        BusinessLogic objBussLogic = new BusinessLogic();
+        objBussLogic.AssociatePlayListToCampaign(playlist.ID, Convert.ToInt32(playlist.CampaignID), associate.GetUsersCompanyID());
+    }
+
+    [WebMethod]
+    public static List<string> GetChannelName(string channelName)
+    {
+        List<string> channelResult = new List<string>();
+        BusinessLogic objBussLogic = new BusinessLogic();
+        //DataTable dtPLayLists = objBussLogic.GetChannels(GetUsersCompanyID());
+        LeftNavigationWizard associate = new LeftNavigationWizard();
+        DataTable dtChannels = objBussLogic.GetChannels(associate.GetUsersCompanyID());
+        if (dtChannels != null)
+        {
+            for (int i = 0; i < dtChannels.Rows.Count; i++)
+            {
+                channelResult.Add(dtChannels.Rows[i]["ChannelName"].ToString());
+            }
+        }
+        return channelResult;
+    }
+    //protected void btnLoadGrid_Click(object sender, EventArgs e)
+    //{
+    //    BusinessLogic objBussLogic = new BusinessLogic();
+    //    int channelId = objBussLogic.GetChannelID(txtChannel.Text);
+    //    hdnChannelID.Value = channelId.ToString();
+    //    LoadCampaignData();
+    //    LoadAssociationGrid(txtChannel.Text);
+    //}
+    protected void btnSaveOrder_Click(object sender, EventArgs e)
+    {
+        UpdatePreference(sender, e);
+    }
+    protected void imgShow_Click(object sender, ImageClickEventArgs e)
+    {
+        BusinessLogic objBussLogic = new BusinessLogic();
+        ImageButton imgShowHide = (sender as ImageButton);
+        GridViewRow row = (imgShowHide.NamingContainer as GridViewRow);
+        if (imgShowHide.CommandArgument == "Show")
+        {
+            row.FindControl("pnlMedia").Visible = true;
+            imgShowHide.CommandArgument = "Hide";
+            imgShowHide.ImageUrl = "../../img/minus.gif";
+            string playListName = gvDest.DataKeys[row.RowIndex].Value.ToString();
+            GridView gvMedia = row.FindControl("gvMedia") as GridView; gvMedia.ToolTip = playListName;
+            DataTable dt = objBussLogic.GetMediaPlayListAssociation(GetUsersCompanyID(), playListName);
+            gvMedia.DataSource = dt;
+            gvMedia.DataBind();
+        }
+        else
+        {
+            row.FindControl("pnlMedia").Visible = false;
+            imgShowHide.CommandArgument = "Show";
+            imgShowHide.ImageUrl = "../../img/plus.gif";
+        }
+    }
+    protected void imgUnAssociate_Click(object sender, ImageClickEventArgs e)
+    {
+        BusinessLogic objBussLogic = new BusinessLogic();
+        ImageButton imgUnAssociate = (sender as ImageButton);
+        GridViewRow row = (imgUnAssociate.NamingContainer as GridViewRow);
+        int playlistID = Convert.ToInt32(gvDest.DataKeys[row.RowIndex].Values["PlayListID"].ToString());
+        bool result = objBussLogic.UnAssociatePlayLists(GetUsersCompanyID(), playlistID);
+        if (result)
+        {
+            Response.Redirect(HttpContext.Current.Request.Url.ToString());
+        }
+    }
+    protected void gvDest_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        string[] SortOrder = ViewState["AssctedPlaylist_Sort_Direction"].ToString().Split(' ');
+        if (SortOrder[0] == e.SortExpression)
+        {
+            if (SortOrder[1] == "ASC")
+            {
+                ViewState["AssctedPlaylist_Sort_Direction"] = e.SortExpression + " " + "DESC";
+            }
+            else
+            {
+                ViewState["AssctedPlaylist_Sort_Direction"] = e.SortExpression + " " + "ASC";
+            }
+        }
+        else
+        {
+            ViewState["AssctedPlaylist_Sort_Direction"] = e.SortExpression + " " + "ASC";
+        }
+        gvDest.DataSource = LoadAssociationGrid(hdnCampaignName.Value);
+        gvDest.DataBind();
+
+    }
+    protected void gvSource_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        string[] SortOrder = ViewState["AvblPlaylist_Sort_Direction"].ToString().Split(' ');
+        if (SortOrder[0] == e.SortExpression)
+        {
+            if (SortOrder[1] == "ASC")
+            {
+                ViewState["AvblPlaylist_Sort_Direction"] = e.SortExpression + " " + "DESC";
+            }
+            else
+            {
+                ViewState["AvblPlaylist_Sort_Direction"] = e.SortExpression + " " + "ASC";
+            }
+        }
+        else
+        {
+            ViewState["AvblPlaylist_Sort_Direction"] = e.SortExpression + " " + "ASC";
+        }
+        gvSource.DataSource = LoadPlaylistData();
+        gvSource.DataBind();
+    }
+    public int GetUsersCompanyID()
+    {
+        int companyID = 0;
+        string userName = Context.User.Identity.Name;
+        BusinessLogic objBussLogic = new BusinessLogic();
+        string userId = objBussLogic.GetUserId(userName.ToLower());
+        if (userId != "0")
+        {
+            DataTable dtCompanies = objBussLogic.GetUserCompany(userId);
+            if (dtCompanies != null && dtCompanies.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dtCompanies.Rows)
+                {
+                    companyID = Convert.ToInt32(dr["CompanyID"]);
+                }
+            }
+        }
+        return companyID;
+    }
+    public DataTable GetCampaigns(int CompanyID)
+    {
+        BusinessLogic objBussLogic = new BusinessLogic();
+        DataTable dtCompanies = objBussLogic.GetCampaigns(GetUsersCompanyID());
+        return dtCompanies;
+    }
+    protected void grdCampaign_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        grdCampaign.EditIndex = e.NewEditIndex;
+        BindGrid(string.Empty);
+    }
+    protected void grdCampaign_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        string strCampaignID = grdCampaign.DataKeys[e.RowIndex].Values["CampaignID"].ToString();
+        TextBox txtCampaignName = (TextBox)grdCampaign.Rows[e.RowIndex].FindControl("txtCampaignName");
+        BusinessLogic objBussLogic = new BusinessLogic();
+        bool blnResult = objBussLogic.UpdateCampaign(Convert.ToInt32(strCampaignID), txtCampaignName.Text);
+        if (blnResult)
+        {
+            lblmsg.ForeColor = Color.Green;
+            lblmsg.Text = txtCampaignName.Text + " updated successfully.";
+            grdCampaign.EditIndex = -1;
+        }
+        else
+        {
+            lblmsg.ForeColor = Color.Red;
+            lblmsg.Text = "Updated failed. Please contact system administrator.";
+            grdCampaign.EditIndex = -1;
+        }
+        BindGrid(string.Empty);
+        lblTitle.Text = txtCampaignName.Text;
+        hdnCampaignName.Value = txtCampaignName.Text;
+    }
+    protected void grdCampaign_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+        grdCampaign.EditIndex = -1;
+        BindGrid(string.Empty);
+    }
+    protected void grdCampaign_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        string strStoreID = grdCampaign.DataKeys[e.RowIndex].Values["CampaignID"].ToString();
+        BusinessLogic objBussLogic = new BusinessLogic();
+        bool blnResult = objBussLogic.DeleteCampaign(Convert.ToInt32(strStoreID));
+        if (blnResult)
+        {
+            lblmsg.ForeColor = Color.Green;
+            lblmsg.Text = "Campaign deleted successfully.";
+            grdCampaign.EditIndex = -1;
+        }
+        else
+        {
+            lblmsg.ForeColor = Color.Red;
+            lblmsg.Text = "Deletion failed. Please contact system administrator.";
+            grdCampaign.EditIndex = -1;
+        }
+        BindGrid(string.Empty);
+
+    }
+    protected void grdCampaign_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            // Set the hand mouse cursor for the selected row.
+            e.Row.Attributes.Add("style", "cursor: pointer");
+
+            e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(grdCampaign, "Select$" + e.Row.RowIndex);
+            e.Row.ToolTip = "Click to select this row.";
+
+            System.Web.UI.WebControls.Image imgCampaign = (System.Web.UI.WebControls.Image)e.Row.FindControl("imgCampaignName");
+            imgCampaign.ImageUrl = "..\\..\\img\\" + Convert.ToString(DataBinder.Eval(e.Row.DataItem, "FileName"));
+            string CampaignID = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "CampaignID"));
+            Button lnkbtnresult = (Button)e.Row.FindControl("ButtonDelete");
+            Button lnkbtnCancel = (Button)e.Row.FindControl("ButtonCancel");
+            if (lnkbtnCancel != null)
+            {
+                lnkbtnCancel.Attributes.Add("onclick", " ");
+            }
+            if (lnkbtnresult != null)
+            {
+                lnkbtnresult.Attributes.Add("onclick", "javascript:return deleteConfirm('" + CampaignID + "')");
+            }
+        }
+        e.Row.Height = Unit.Pixel(20);
+    }
+    protected void grdCampaign_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if(string.Equals(e.CommandName,"Manage"))
+        {
+            lblSelectedCampaign.Visible = true;
+        }
+        //int index = Convert.ToInt32(e.CommandArgument);
+        //BindGrid();//Your method to set datasource anddatabind GridView1
+        //grdCampaign.Rows[index].Attributes.Add("style", "background-color:#A1DCF2");
+    }
+    private void BindGrid(String strCampaignName)
+    {
+        DataTable dataTable = GetCampaigns(GetUsersCompanyID());
+        if (!IsPostBack)
+        {
+            if (dataTable != null)
+            {
+                DataView dataView = new DataView(dataTable);
+                dataView.Sort = "DateCreated desc";
+
+                grdCampaign.DataSource = dataView;
+                grdCampaign.DataBind();
+            }
+        }
+        else
+        {
+            if (ViewState["SortExpression"] != null && ViewState["SortDirection"] != null)
+            {
+                if (dataTable != null)
+                {
+                    DataView dataView = new DataView(dataTable);
+                    dataView.Sort = Convert.ToString(ViewState["SortExpression"]) + Convert.ToString(ViewState["SortDirection"]);
+
+                    grdCampaign.DataSource = dataView;
+                    grdCampaign.DataBind();
+                }
+            }
+            else
+            {
+                if (dataTable != null && dataTable.Rows.Count > 0)
+                {
+                    grdCampaign.DataSource = dataTable.DefaultView;
+                    grdCampaign.DataBind();
+                }
+                else
+                {
+                    dataTable.NewRow();
+                    grdCampaign.DataSource = dataTable.DefaultView;
+                    grdCampaign.DataBind();
+
+                }
+            }
+        }
+        if (!string.IsNullOrEmpty(strCampaignName))
+        {
+            foreach (GridViewRow gvRow in grdCampaign.Rows)
+            {
+                Label lblCampaignName = (Label)(gvRow.Cells[3].FindControl("lblCampaignName"));
+                if (lblCampaignName != null)
+                {
+                    if (string.Equals(lblCampaignName.Text.ToLowerInvariant(), strCampaignName.ToLowerInvariant()))
+                    {
+                        gvRow.BackColor = ColorTranslator.FromHtml("#A1DCF2");
+                        lblTitle.Text = strCampaignName;
+                    }
+                    else
+                    {
+                        gvRow.BackColor = Color.Transparent;
+                    }
+                }
+            }
+        }
+    }
+    protected void grdCampaign_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        int sortColumnIndex = 0;
+
+        if (e.Row.RowType == DataControlRowType.Header)
+            sortColumnIndex = GetSortColumnIndex();
+
+        if (sortColumnIndex != 1)
+        {
+            AddSortImage(sortColumnIndex, e.Row);
+        }
+
+        if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != grdCampaign.EditIndex)
+        {
+            // Programmatically reference the Edit and Delete LinkButtons
+            Button EditButton = e.Row.FindControl("ButtonEdit") as Button;
+
+            Button DeleteButton = e.Row.FindControl("ButtonDelete") as Button;
+
+            //EditButton.Visible = (User.IsInRole("VUP Admin") || User.IsInRole("Company Admin") || User.IsInRole("Store Admin"));
+            //DeleteButton.Visible = (User.IsInRole("VUP Admin") || User.IsInRole("Company Admin") || User.IsInRole("Store Admin"));
+        }
+    }
+    protected int GetSortColumnIndex()
+    {
+        foreach (DataControlField field in grdCampaign.Columns)
+        {
+            if (field.SortExpression == grdCampaign.SortExpression)
+                return grdCampaign.Columns.IndexOf(field);
+            else
+                return -1;
+        }
+        return -1;
+    }
+    protected void AddSortImage(int columnIndex, GridViewRow HeaderRow)
+    {
+        System.Web.UI.WebControls.Image sortImage = new System.Web.UI.WebControls.Image();
+        if (showImage) // this is a boolean variable which should be false 
+        {
+            if (ViewState["sortDirection"] != null)
+            {//  on page load so that image wont show up initially.
+                if (ViewState["sortDirection"].ToString() == "Ascending")
+                {
+                    sortImage.ImageUrl = "~/Images/asc.gif";
+                    sortImage.AlternateText = " Ascending Order";
+                }
+                else
+                {
+                    sortImage.ImageUrl = "~/Images/desc.gif";
+                    sortImage.AlternateText = " Descending Order";
+                }
+            }
+            //grdCampaign.HeaderRow.Cells[0].Controls.Add(sortImage);
+        }
+    }
+    protected void grdCampaign_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        grdCampaign.PageIndex = e.NewPageIndex;
+
+        if (!isSort) // this will get exectued if user clicks paging
+        {            // before sorting istelf
+
+            BindGrid(string.Empty);    //instance. Provide your datasource
+            // to bind the data
+        }
+        else if (isAscend)// this will get exectued if user clicks paging
+        // after cliclking ascending order
+        {
+
+            // I am passing only "DateRequest" as sortexpression for instance. because
+            // i am implementing sorting for only one column. You can generalize it to 
+            // pass that particular column on sorting.
+            SortGridView("CampaignName", ASCENDING);
+
+        }
+        else // this will get exectued if user clicks paging
+        // after cliclking descending order
+        {
+            SortGridView("CampaignName", DESCENDING);
+        }
+    }
+    private SortDirection GridViewSortDirection
+    {
+        get
+        {
+            if (ViewState["sortDirection"] == null)
+                ViewState["sortDirection"] = SortDirection.Ascending;
+            return (SortDirection)ViewState["sortDirection"];
+        }
+        set { ViewState["sortDirection"] = value; }
+    }
+    protected void SortGridView(string sortExpression, string direction)
+    {
+        DataTable dataTable = GetCampaigns(GetUsersCompanyID());
+        if (dataTable != null)
+        {
+            DataView dataView = new DataView(dataTable);
+            dataView.Sort = sortExpression + direction;
+
+            grdCampaign.DataSource = dataView;
+            grdCampaign.DataBind();
+        }
+    }
+    protected void grdCampaign_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        isSort = true;
+        string sortExpression = e.SortExpression;
+
+        ViewState["SortExpression"] = sortExpression;
+        showImage = true;
+        if (GridViewSortDirection == SortDirection.Ascending)
+        {
+            isAscend = true;
+            SortGridView(sortExpression, ASCENDING);
+            ViewState["SortDirection"] = ASCENDING;
+            GridViewSortDirection = SortDirection.Descending;
+        }
+        else
+        {
+            isAscend = false;
+            SortGridView(sortExpression, DESCENDING);
+            ViewState["SortDirection"] = DESCENDING;
+            GridViewSortDirection = SortDirection.Ascending;
+        }
+    }
+    protected void btnLoadSearchGrid_Click(object sender, EventArgs e)
+    {
+
+    }
+    protected void btnLoadGrid_Click(object sender, EventArgs e)
+    {
+        BusinessLogic objBussLogic = new BusinessLogic();
+        int campaignId = objBussLogic.GetCampaignID(hdnCampaignName.Value);
+        hdnCampaignID.Value = campaignId.ToString();
+        LoadPlaylistData();
+        LoadAssociationGrid(hdnCampaignName.Value);
+    }
+    protected void grdCampaign_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        foreach (GridViewRow row in grdCampaign.Rows)
+        {
+            if (row.RowIndex == grdCampaign.SelectedIndex)
+            {
+                row.BackColor = ColorTranslator.FromHtml("#cbcbcb"); 
+                row.ToolTip = string.Empty;
+                Label lblCampaignName = grdCampaign.SelectedRow.FindControl("lblCampaignName") as Label;
+                if (lblCampaignName != null)
+                {
+                    string strCampaignName = (grdCampaign.SelectedRow.FindControl("lblCampaignName") as Label).Text;
+                    lblSelectedCampaign.Visible = true;
+                    lblSelectedCampaign.Text = " - " + strCampaignName;
+                    hdnCampaignName.Value = strCampaignName;
+                }
+            }
+            else
+            {
+                row.BackColor = Color.Transparent;
+            }
+        }
+    }
+    protected void SideBarList_ItemDataBound(object sender, DataListItemEventArgs e)
+    {
+        WizardStep dataItem = e.Item.DataItem as WizardStep;
+        LinkButton linkButton = e.Item.FindControl("SideBarButton") as LinkButton;
+
+        if (dataItem != null)
+        {
+            if (dataItem.Wizard.ActiveStepIndex == e.Item.ItemIndex)
+            {
+                linkButton.CssClass = "sidebarActiveLink";
+            }
+        }
+    }
+}
+public class Playlist
+{
+    public int ID { get; set; }
+    public string CampaignID { get; set; }
+}

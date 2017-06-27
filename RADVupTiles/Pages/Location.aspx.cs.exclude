@@ -1,0 +1,170 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using RADBusinessLogicLayer;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Net;
+using System.IO;
+using System.Web.Security;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Data.SqlClient;
+using System.Text;
+using System.IO;
+using System.Drawing;
+
+
+public partial class Pages_Location : System.Web.UI.Page
+{
+
+    int companyID = 0;
+    protected override void OnInit(EventArgs e)
+    {
+        base.OnInit(e);
+        if (Request.QueryString["CompanyID"] != null)
+        {
+            companyID = Convert.ToInt32(Request.QueryString["CompanyID"].ToString());
+            hdnCompnayID.Value = companyID.ToString();
+        }
+    }
+
+    public static string strcon = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+    string[] states = new[] { "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" };
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        lblmsg.Text = string.Empty;
+        if (!IsPostBack)
+        {
+            PopulateData();
+        }
+    }
+
+    protected void ChangePage(object sender, GridViewPageEventArgs e)
+    {
+    }
+
+    protected void EditRow(object sender, GridViewEditEventArgs e)
+    {
+ 
+    }
+    protected void CancelEditRow(object sender, GridViewCancelEditEventArgs e)
+    {
+        
+    }
+    protected void DeleteRow(object sender, GridViewDeleteEventArgs e)
+    {
+        using (SqlConnection conn = new SqlConnection(strcon))
+        {
+            string sql = "Delete from Location" +
+            " where LocationID = @LocationID";
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@LocationID", LocationID);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+       
+    }
+    private DataTable GetLocationData()
+    {
+        DataTable dt = new DataTable();
+        using (SqlConnection cn = new SqlConnection(strcon))
+        {
+            using (SqlCommand cmd = new SqlCommand("SP_GetLocationData", cn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (SqlDataAdapter ad = new SqlDataAdapter(cmd))
+                {
+                    ad.Fill(dt);
+                }
+            }
+        }
+        return dt;
+    }
+
+    private DataSet GetAreaRegionData()
+    {
+        DataSet dt = new DataSet();
+        using (SqlConnection cn = new SqlConnection(strcon))
+        {
+            using (SqlCommand cmd = new SqlCommand("select AreaName,AreaID from Area;select RegionName,RegionID from Regions", cn))
+            {
+                cmd.CommandType = CommandType.Text;
+                using (SqlDataAdapter ad = new SqlDataAdapter(cmd))
+                {
+                    ad.Fill(dt);
+                }
+            }
+        }
+        return dt;
+    }
+
+    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow && GridView1.EditIndex == e.Row.RowIndex)
+        {
+            DataRowView dr = e.Row.DataItem as DataRowView;
+            DropDownList dState = (DropDownList)e.Row.FindControl("dState");
+            DropDownList dRegion = (DropDownList)e.Row.FindControl("dRegion");
+            DropDownList dArea = (DropDownList)e.Row.FindControl("dArea");
+            Label lblArea = (Label)e.Row.FindControl("lblArea");
+            Label lblRegion = (Label)e.Row.FindControl("lblRegion");
+            Label lblState = (Label)e.Row.FindControl("lblState");
+            DataSet ds = new DataSet();
+            ds = GetAreaRegionData();
+            dArea.DataSource = ds.Tables[0];
+            dArea.DataValueField = "AreaName";
+            dArea.DataTextField = "AreaName";
+            dArea.DataBind();
+            dRegion.DataSource = ds.Tables[1];
+            dRegion.DataValueField = "RegionName";
+            dRegion.DataTextField = "RegionName";
+            dRegion.DataBind();
+            dState.DataSource = states.ToList();
+            dState.DataBind();
+            dArea.SelectedValue = dr[7].ToString();
+            dRegion.SelectedValue = dr[6].ToString();
+            dState.SelectedValue = dr[4].ToString();
+        }
+    }
+
+    private void ExportToExcel()
+    {
+        DataTable dt = GetLocationData();
+        GridView gridview = new GridView();
+        gridview.HeaderStyle.BackColor = ColorTranslator.FromHtml("#ef7c31");
+        gridview.AlternatingRowStyle.BackColor = ColorTranslator.FromHtml("#F7F6F3");
+        gridview.AlternatingRowStyle.ForeColor = ColorTranslator.FromHtml("#333333");
+
+        gridview.DataSource = dt;
+        gridview.DataBind();
+
+        // Clear all the content from the current response
+        Response.ClearContent();
+        Response.Buffer = true;
+        // set the header
+        Response.AddHeader("content-disposition", "attachment;filename=Locations.xls");
+        Response.ContentType = "application/ms-excel";
+        Response.Charset = "";
+        // create HtmlTextWriter object with StringWriter
+        using (StringWriter sw = new StringWriter())
+        {
+            using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+            {
+                // render the GridView to the HtmlTextWriter
+                gridview.RenderControl(htw);
+                // Output the GridView content saved into StringWriter
+                Response.Output.Write(sw.ToString());
+                Response.Flush();
+                Response.End();
+            }
+        }
+    }
+}

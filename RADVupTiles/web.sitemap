@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  
+  <siteMapNode url="Default.aspx" title="Home" description="Home">
+    <siteMapNode url="~/Pages/CustomUpload.aspx" title="Upload Media" description="Upload Media"/>
+    <siteMapNode url="~/Pages/Create/CreateCompany.aspx#" title="Create" description="Create">
+      <siteMapNode url="~/Pages/Create/CreateCompany.aspx" title="Create Company" description="Create Company" />
+      <siteMapNode url="~/Pages/Create/CreateChannel.aspx" title="Create Channel" description="Create Channel" />
+      <siteMapNode url="~/Pages/Create/CreateCampaign.aspx" title="Create Campaign" description="Create Campaign" />
+      <siteMapNode url="~/Pages/Create/CreatePlaylist.aspx" title="Create Playlist" description="Create Playlist" />
+      <siteMapNode url="~/Pages/Create/CreateRADDevice.aspx" title="Create RAD Device" description="Create RAD Device" />
+      <siteMapNode url="~/Pages/Create/CreateStore.aspx" title="Create Store" description="Create Store" />
+      <siteMapNode url="~/Pages/Create/CreatingUserAccounts.aspx" title="Create User" description="Create User" />
+    </siteMapNode>
+    <siteMapNode  url="~/Pages/Associate/MediaToPlayList.aspx#" title="Associate" description="Associate">
+     <siteMapNode url="~/Pages/Associate/MediaToPlayList.aspx" title="Media To Playlist" description="Media To Playlist" />
+      <siteMapNode url="~/Pages/Associate/PlayListToCampaign.aspx" title="Playlist To Campaign" description="Playlist To Campaign" />
+      <siteMapNode url="~/Pages/Associate/CampaignToChannel.aspx" title="Campaign To Channel" description="Campaign To Channel" />
+      <siteMapNode url="~/Pages/Associate/RADDeviceToChannel.aspx" title="RADDevice To Channel" description="RADDevice To Channel" />
+    </siteMapNode>
+    <siteMapNode  url="~/Pages/UserManagement/ManageRoles.aspx#" title="User Management" description="User Management">
+      <siteMapNode url="~/Pages/UserManagement/ManageRoles.aspx" title="Manage Roles" description="Manage Roles" />
+      <siteMapNode url="~/Pages/UserManagement/UserPermissions.aspx" title="User &amp; Roles" description="User &amp; Roles" />
+      <siteMapNode url="~/Pages/UserManagement/ManageUserPermissions.aspx" title="User Permissions" description="User Permissions" />
+    </siteMapNode>
+    <siteMapNode url="~/Pages/Calendar.aspx" title="Calendar" description="Calendar"/>
+  </siteMapNode>
+</siteMap>

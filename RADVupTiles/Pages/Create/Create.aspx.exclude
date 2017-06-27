@@ -1,0 +1,108 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/RADVupTiles.master" AutoEventWireup="true" CodeFile="Create.aspx.cs" Inherits="Pages_Create" %>
+
+<%@ OutputCache NoStore="true" Location="None" %>
+
+<asp:Content ContentPlaceHolderID="scripts" runat="server">
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <% if (Request.IsLocal)
+       { %>
+    <!-- 
+        If you change any of the below javascript files, make sure you run the Combine.bat
+        file in the /js folder to generate the CombinedDashboard.js file again. And then don't
+        forget to update the ?v=14#. Otherwise user's will have cached copies in their browser
+        and won't get the newly deployed file. -->
+    <script type="text/javascript" src="js/TheCore.js?v=14"></script>
+    <script type="text/javascript" src="tiles/tiles.js?v=14"></script>
+    <script type="text/javascript" src="js/Dashboard.js?v=14"></script>
+
+
+    <% }
+       else
+       { %>
+    <script type="text/javascript" src="js/CombinedDashboard.js?v=14"></script>
+    <% } %>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            <%= GetAlerts() %>
+        });
+    </script>
+
+</asp:Content>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
+    <div id="body" class="unselectable" style="margin-top: 50px">
+        <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+        <asp:SiteMapPath ID="SiteMap1" runat="server" />
+        
+
+        <table style="width: 800px; margin: 25px">
+            <tr>
+                <td>
+                    <div style="width: 210px; height: 210px; margin-right: 10px; padding: 10px 0 0 10px; border: 3px solid black; border-radius: 10px; -webkit-border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px">
+                        <a href="CreateCompany.aspx">
+                            <img src="../../img/CreateCompany.jpg" />
+                        </a>
+                    </div>
+                    <p style="margin-left: 100px"><span style="font-weight: bold">Create Company</span></p>
+
+                </td>
+                <td style="width: 300px; height: 300px">
+                    <div style="width: 210px; height: 210px; padding: 10px 0 0 10px; margin-right: 10px; border: 3px solid black; border-radius: 10px; -webkit-border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px">
+                        <a href="CreatePlaylist.aspx">
+                            <img src="../../img/CreatePlayList.jpg" />
+                        </a>
+                    </div>
+                    <p style="margin-left: 100px"><span style="font-weight: bold">Create PlayList</span></p>
+                </td>
+                <td style="width: 300px; height: 300px">
+                    <div style="width: 210px; height: 210px; padding: 10px 0 0 10px; margin-right: 10px; border: 3px solid black; border-radius: 10px; -webkit-border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px">
+                        <a href="CreateCampaign.aspx">
+                            <img src="../../img/CreateCampaign.jpg" />
+                        </a>
+                    </div>
+                    <p style="margin-left: 100px"><span style="font-weight: bold">Create Campaign</span></p>
+                </td>
+                <td style="width: 300px; height: 300px">
+                    <div style="width: 210px; height: 210px; padding: 10px 0 0 10px; margin-right: 10px; border: 3px solid black; border-radius: 10px; -webkit-border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px">
+                        <a href="CreatingUserAccounts.aspx">
+                            <img src="../../img/SampleImage.jpg" />
+                        </a>
+                    </div>
+                    <p style="margin-left: 100px"><span style="font-weight: bold">Create User</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="width: 210px; height: 210px; padding: 10px 0 0 10px; margin-right: 10px; border: 3px solid black; border-radius: 10px; -webkit-border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px">
+                        <a href="CreateStore.aspx">
+                            <img src="../../img/CreateStore.jpg" />
+                        </a>
+                    </div>
+                    <p style="margin-left: 100px"><span style="font-weight: bold">Create Store</span></p>
+                </td>
+                <td>
+                    <div style="width: 210px; height: 210px; margin-right: 10px; border: 3px solid black; padding: 10px 0 0 10px; border-radius: 10px; -webkit-border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px">
+                        <a href="CreateRADDevice.aspx">
+                            <img src="../../img/CreateRADDevice.png" />
+                        </a>
+                    </div>
+                    <p style="margin-left: 100px"><span style="font-weight: bold">Create RAD Device</span></p>
+
+                </td>
+                <td>
+                    <div style="width: 210px; height: 210px; margin-right: 10px; border: 3px solid black; padding: 10px 0 0 10px; border-radius: 10px; -webkit-border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px">
+                        <a href="CreateChannel.aspx">
+                            <img src="../../img/Question.png" />
+                        </a>
+                    </div>
+                    <p style="margin-left: 100px"><span style="font-weight: bold">Create Channel</span></p>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>
+
+

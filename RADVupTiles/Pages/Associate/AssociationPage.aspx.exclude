@@ -1,0 +1,49 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/RADVupTiles.master" AutoEventWireup="true" CodeFile="AssociationPage.aspx.cs" Inherits="Pages_AssociatePage" %>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
+    <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+    <asp:SiteMapPath ID="SiteMap1" runat="server" />
+    <h4>HTML Tags List Content</h4>
+    <div id="body" class="unselectable" style="margin-top: 50px">
+        <strong draggable="true">Associate
+        </strong>
+        <table style="width: 800px; margin: 10px">
+            <tr>
+                <td>
+                    <div style="width: 190px; height: 210px; margin-right: 10px; padding: 40px 0 0 40px; border: 2px solid black; border-radius: 10px; -webkit-border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px">
+                        <a href="MediaToPlayList.aspx">
+                            <img src="../../img/SampleImage.jpg" />
+                        </a>
+                    </div>
+                    <p style="margin-left: 50px"><span style="font-weight: bold">Media to PlayList</span></p>
+
+                </td>
+                <td>
+                    <div style="width: 190px; height: 210px; margin-right: 10px; padding: 40px 0 0 40px; border: 2px solid black; border-radius: 10px; -webkit-border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px">
+                        <a href="PlayListToCampaign.aspx">
+                            <img src="../../img/SampleImage.jpg" />
+                        </a>
+                    </div>
+                    <p style="margin-left: 50px"><span style="font-weight: bold">PlayList to Campaign</span></p>
+                </td>
+                <td>
+                    <div style="width: 190px; height: 210px; margin-right: 10px; padding: 40px 0 0 40px; border: 2px solid black; border-radius: 10px; -webkit-border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px">
+                        <a href="CampaignToChannel.aspx">
+                            <img src="../../img/SampleImage.jpg" />
+                        </a>
+                    </div>
+                    <p style="margin-left: 50px"><span style="font-weight: bold">Campaign to Channel</span></p>
+                </td>
+                <td>
+                    <div style="width: 190px; height: 210px; margin-right: 10px; padding: 40px 0 0 40px; border: 2px solid black; border-radius: 10px; -webkit-border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px">
+                        <a href="RADDeviceToChannel.aspx">
+                            <img src="../../img/SampleImage.jpg" />
+                        </a>
+                    </div>
+                    <p style="margin-left: 50px"><span style="font-weight: bold">RAD Device to Channel</span></p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>
+

@@ -1,0 +1,140 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/VideoUp.master" AutoEventWireup="true" CodeFile="MediaPlaylistAssociation.aspx.cs" Inherits="Master_MediaPlaylistAssociation" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
+    <div style="border: 2px solid #a1a1a1; padding: 10px 40px; background: #dddddd; border-radius: 25px;">
+        <div style="border: 1px solid rgba(80, 124, 208, 1); background: rgba(80, 124, 208, 1); border-radius: 5px; color: white; padding-left: 5px; text-align: center">
+            <h4>Associate Media to PlayList</h4>
+        </div>
+        <div style="border: 2px solid #a1a1a1; padding: 10px 40px; background: #dddddd; border-radius: 25px; padding-bottom: 40px; margin-top: 20px">
+            <table>
+                <tr>
+                    <td style="padding-right: 50px;">
+                        <div style="background: rgba(80, 124, 208, 1); border-radius: 10px; color: white; width: 500px; padding-left: 5px; margin-bottom: 10px; text-align: center;margin-left:50px">
+                            <h4>Please select Media for Association</h4>
+                        </div>
+                        <div style="background-color: #507CD1; background-repeat: repeat-x; height: 30px; width: 600px; margin: 0; padding: 0">
+                            <table cellspacing="0" cellpadding="0" rules="all" border="1" id="tblMediaHeader"
+                                style="font-family: Arial; font-size: 10pt; width: 600px; color: white; border-collapse: collapse; height: 100%;">
+                                <tr>
+                                    <td style="width: 50px; text-align: center">Select</td>
+                                    <td style="width: 70px; text-align: center">Media ID</td>
+                                    <td style="width: 250px; text-align: center">File Name</td>
+                                    <td style="width: 250px; text-align: center">Uploaded By</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="float: left; height: 200px; width: 617px; overflow: auto;">
+                            <asp:GridView ID="grdMedia" runat="server" AutoGenerateColumns="false" CellPadding="4"
+                                ForeColor="#333333" GridLines="Horizontal" ShowHeader="false" Width="600px">
+                                <Columns>
+                                    <asp:TemplateField ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center" HeaderText="Select">
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="cbSelectMedia" runat="server"></asp:CheckBox>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center" DataField="MediaID" HeaderText="ID"></asp:BoundField>
+                                    <asp:BoundField ItemStyle-Width="250px" ItemStyle-HorizontalAlign="Center" DataField="Location" HeaderText="File Name"></asp:BoundField>
+                                    <asp:BoundField ItemStyle-Width="250px" ItemStyle-HorizontalAlign="Center" DataField="UploadedBy" HeaderText="Uploaded By"></asp:BoundField>
+                                </Columns>
+                                <AlternatingRowStyle BackColor="White" />
+                                <EditRowStyle BackColor="#2461BF" />
+                                <FooterStyle BackColor="#507CD1" ForeColor="White" Font-Bold="True" />
+                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle ForeColor="White" HorizontalAlign="Center" BackColor="#2461BF" />
+                                <RowStyle BackColor="#EFF3FB" />
+                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                                <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                                <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                            </asp:GridView>
+                        </div>
+                    </td>
+                    <td style="padding-right: 30px;">
+                        <div style="background: rgba(80, 124, 208, 1); border-radius: 10px; color: white; padding-left: 5px; margin-left:20px;margin-bottom: 10px;  width: 400px;text-align: center">
+                            <h4>Please select Playlist(s) to associate to Media</h4>
+                        </div>
+                        <div style="background-color: #507CD1; background-repeat: repeat-x; height: 30px; width: 450px; margin: 0; padding: 0">
+                            <table cellspacing="0" cellpadding="0" rules="all" border="1" id="tblPlaylistHeader"
+                                style="font-family: Arial; font-size: 10pt; width: 450px; color: white; border-collapse: collapse; height: 100%;">
+                                <tr>
+                                    <td style="width: 50px; text-align: center">Select</td>
+                                    <td style="width: 50px; text-align: center">Playlist ID</td>
+                                    <td style="width: 250px; text-align: center">Playlist Name</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="float: right; height: 200px; width: 467px; overflow: auto;">
+                            <asp:GridView ID="grdPlaylist" runat="server" Style="height: 100px; overflow: auto" AutoGenerateColumns="false"
+                                CellPadding="4" ForeColor="#333333" GridLines="Horizontal" ShowHeader="false">
+                                <Columns>
+                                    <asp:TemplateField ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center" HeaderText="Select">
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="cbSelectPlaylist" runat="server"></asp:CheckBox>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center" DataField="PlayListID" HeaderText="ID"></asp:BoundField>
+                                    <asp:BoundField ItemStyle-Width="350px" ItemStyle-HorizontalAlign="Center" DataField="PlayListName" HeaderText="Playlist Name"></asp:BoundField>
+                                </Columns>
+                                <AlternatingRowStyle BackColor="White" />
+                                <EditRowStyle BackColor="#2461BF" />
+                                <FooterStyle BackColor="#507CD1" ForeColor="White" Font-Bold="True" />
+                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle ForeColor="White" HorizontalAlign="Center" BackColor="#2461BF" />
+                                <RowStyle BackColor="#EFF3FB" />
+                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                                <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                                <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                            </asp:GridView>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="float: right;">
+                            <asp:Button runat="server" ID="btnAssociateMedia" Text="Associate Media to Playlist" class="btn btn-primary btn-large" OnClick="btnAssociateMedia_Click" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br />
+        <div style="text-align: center; padding-bottom: 10px">
+            <asp:Label ID="ActionStatus" runat="server" Font-Bold="true"></asp:Label>
+        </div>
+        <div align="center" style="border: 2px solid #a1a1a1; padding: 10px 40px; background: #dddddd; border-radius: 25px; margin-bottom: 20px">
+            <div style="background: rgba(80, 124, 208, 1); border-radius: 10px; color: white; padding-left: 5px; margin-bottom: 10px; width: 500px; text-align: center">
+                <h4>Playlist and Media Association</h4>
+            </div>
+            <div style="background-color: #507CD1; background-repeat: repeat-x; height: 30px; width: 600px; margin: 0; padding: 0">
+                <table cellspacing="0" cellpadding="0" rules="all" border="1" id="tblMediaHeader"
+                    style="font-family: Arial; font-size: 10pt; width: 600px; color: white; border-collapse: collapse; height: 100%;">
+                    <tr>
+                        <td style="width: 300px; text-align: center">Playlist Name</td>
+                        <td style="width: 300px; text-align: center">Media Name</td>
+                    </tr>
+                </table>
+            </div>
+            <div style="height: 200px; width: 600px; overflow: auto;">
+                <asp:GridView ID="grdPlayListMedia" runat="server" CellPadding="4" ForeColor="#333333" GridLines="Horizontal" ShowHeader="false" AutoGenerateColumns="false">
+                    <Columns>
+                        <asp:BoundField ItemStyle-Width="300px" ItemStyle-HorizontalAlign="Center" DataField="PlayListName" HeaderText="ID"></asp:BoundField>
+                        <asp:BoundField ItemStyle-Width="300px" ItemStyle-HorizontalAlign="Center" DataField="Description" HeaderText="Playlist Name"></asp:BoundField>
+                    </Columns>
+                    <AlternatingRowStyle BackColor="White" />
+                    <EditRowStyle BackColor="#2461BF" />
+                    <FooterStyle BackColor="#507CD1" ForeColor="White" Font-Bold="True" />
+                    <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle ForeColor="White" HorizontalAlign="Center" BackColor="#2461BF" />
+                    <RowStyle BackColor="#EFF3FB" />
+                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                    <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                    <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                    <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                    <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                </asp:GridView>
+            </div>
+        </div>
+    </div>
+</asp:Content>
+

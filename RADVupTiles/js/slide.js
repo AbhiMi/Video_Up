@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var AuthValue = $('#ctl00_hdnIsAuthenticated').val();
-    if (AuthValue == 0) // Not Authenticated
+    if (AuthValue == 0) // Not Authenticated 
     {
         $("#open").css({ "display": "block" });
         $("#register").css({ "display": "block" });

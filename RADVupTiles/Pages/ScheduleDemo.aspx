@@ -28,6 +28,22 @@
                     </td>
                     <td></td>
                 </tr>
+                 <tr>
+                    <td>
+                        <asp:Label ID="lblEmail" runat="server" Text="Email*"></asp:Label><br />
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox><br />
+                        <asp:RegularExpressionValidator ID="valRegEx" runat="server"
+                            ControlToValidate="txtEmail"
+                            ValidationExpression=".*@.*\..*"
+                            ErrorMessage="*Invalid Email address."
+                            Display="dynamic">
+                        </asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
+                            ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <asp:Label ID="lblName" runat="server" Text="Name*"></asp:Label><br />
@@ -48,15 +64,7 @@
                             ControlToValidate="txtCompany"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblCompanySiteUrl" runat="server" Text="Company SiteUrl*"></asp:Label><br />
-                    </td>
-                    <td>
-                        <asp:TextBox ID="txtCompanySiteUrl" runat="server" ValidationGroup="contact"></asp:TextBox><br /><br />
-                    </td>
-                </tr>
-                <tr>
+               <tr>
                     <td>
                        <asp:Label ID="lblSubject" runat="server" Text="Subject*"></asp:Label><br />
                     </td>
@@ -85,25 +93,17 @@
                         <asp:Label ID="lblOfficeExtn" runat="server" Text="Office Contact "></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="txtOfficeExtn" runat="server"></asp:TextBox><br />
+                        <asp:TextBox ID="txtOfficeExtn" runat="server"></asp:TextBox> / Extn# <asp:TextBox ID="txtExtn" runat="server" Width="100px"></asp:TextBox><br />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*"
                             ControlToValidate="txtOfficeExtn"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
-                <tr>
+               <tr>
                     <td>
-                        <asp:Label ID="lblEmail" runat="server" Text="Email*"></asp:Label><br />
+                        <asp:Label ID="lblCompanySiteUrl" runat="server" Text="Company SiteUrl"></asp:Label><br />
                     </td>
                     <td>
-                        <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox><br />
-                        <asp:RegularExpressionValidator ID="valRegEx" runat="server"
-                            ControlToValidate="txtEmail"
-                            ValidationExpression=".*@.*\..*"
-                            ErrorMessage="*Invalid Email address."
-                            Display="dynamic">
-                        </asp:RegularExpressionValidator>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
-                            ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
+                        <asp:TextBox ID="txtCompanySiteUrl" runat="server" ValidationGroup="contact"></asp:TextBox><br /><br />
                     </td>
                 </tr>
                 <tr>

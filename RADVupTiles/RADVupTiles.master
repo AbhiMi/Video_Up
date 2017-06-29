@@ -73,8 +73,7 @@
         .modal-content {
             background-color: rgba(233, 233, 233, 1);
             margin: auto;
-            padding: 20px;
-            border-bottom: 2px solid #888;
+            padding: 15px;
             width: 95%%;
         }
 
@@ -196,10 +195,26 @@
                         <div id="myModal" class="modal">
                             <!-- Modal content -->
                             <div class="modal-content">
-                                <h2 style="font-weight: bold">Schedule Demo</h2>
+                                <h2 style="font-weight: bold">Schedule Demo</h2> 
                                 <span class="close" style="margin-top:-15px;color:red">&times;</span>
                                 <div style="float: left; width: 65%" class="RADCycle">
-                                    <table border="0" style="width: 409px; margin: 40px">
+                                    <table border="0" style="width: 409px; margin: 20px">
+                                        <tr>
+                                            <td>
+                                                <asp:Label ID="lblEmail" runat="server" Text="Email*"></asp:Label><br />
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox><br />
+                                                <asp:RegularExpressionValidator ID="valRegEx" runat="server"
+                                                    ControlToValidate="txtEmail"
+                                                    ValidationExpression=".*@.*\..*"
+                                                    ErrorMessage="*Invalid Email address."
+                                                    Display="dynamic">
+                                                </asp:RegularExpressionValidator>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*"
+                                                    ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>
                                                 <asp:Label ID="Label1" runat="server" Text="Name*"></asp:Label><br />
@@ -218,15 +233,6 @@
                                                 <asp:TextBox ID="txtCompany" runat="server" ValidationGroup="contact"></asp:TextBox><br />
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*"
                                                     ControlToValidate="txtCompany"></asp:RequiredFieldValidator>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <asp:Label ID="lblCompanySiteUrl" runat="server" Text="Company SiteUrl*"></asp:Label><br />
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="txtCompanySiteUrl" runat="server" ValidationGroup="contact"></asp:TextBox><br />
-                                                <br />
                                             </td>
                                         </tr>
                                         <tr>
@@ -258,25 +264,18 @@
                                                 <asp:Label ID="lblOfficeExtn" runat="server" Text="Office Contact "></asp:Label>
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="txtOfficeExtn" runat="server"></asp:TextBox><br />
+                                                <asp:TextBox ID="txtOfficeExtn" runat="server" Width="145px"></asp:TextBox> / Extn: <asp:TextBox ID="txtExtn" runat="server" Width="70px"></asp:TextBox> <br />
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*"
                                                     ControlToValidate="txtOfficeExtn"></asp:RequiredFieldValidator>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:Label ID="lblEmail" runat="server" Text="Email*"></asp:Label><br />
+                                                <asp:Label ID="lblCompanySiteUrl" runat="server" Text="Company SiteUrl"></asp:Label><br />
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox><br />
-                                                <asp:RegularExpressionValidator ID="valRegEx" runat="server"
-                                                    ControlToValidate="txtEmail"
-                                                    ValidationExpression=".*@.*\..*"
-                                                    ErrorMessage="*Invalid Email address."
-                                                    Display="dynamic">
-                                                </asp:RegularExpressionValidator>
-                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*"
-                                                    ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
+                                                <asp:TextBox ID="txtCompanySiteUrl" runat="server" ValidationGroup="contact"></asp:TextBox><br />
+                                                <br />
                                             </td>
                                         </tr>
                                         <tr>

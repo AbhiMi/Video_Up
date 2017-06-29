@@ -68,7 +68,7 @@ public partial class Pages_ScheduleDemo : System.Web.UI.Page
         message.From = fromEmail;
         message.To = yourEmail;
         message.Subject = "Password Changed";
-        message.TextBody = "Name: " + txtName.Text + "<br/> Company:" + txtCompany.Text + "<br/> Company Site Url:" + txtCompanySiteUrl.Text + "<br/>Subject: " + ddlSubject.SelectedItem.Text + "<br/> Contact No. " + txtContactNo.Text +"<br/> Office Contact:" + txtOfficeExtn.Text + "<br />Email: " + txtEmail.Text; ;
+        message.TextBody = "Name: " + txtName.Text + "<br/> Company:" + txtCompany.Text + "<br/> Company Site Url:" + txtCompanySiteUrl.Text + "<br/>Subject: " + ddlSubject.SelectedItem.Text + "<br/> Contact No. " + txtContactNo.Text +"<br/> Office Contact:" + txtOfficeExtn.Text + txtExtn.Text + "<br />Email: " + txtEmail.Text; ;
 
         // Send message.
         message.Send();

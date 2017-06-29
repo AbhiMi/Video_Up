@@ -147,10 +147,10 @@ public partial class Droptiles : System.Web.UI.MasterPage
         message.From = fromEmail;
         message.To = strToEmail;
         message.Subject = "Schedule Demo";
-        message.TextBody = "Name: " + txtName.Text + "<br/> Company:" + txtCompany.Text + "<br/> Company Site Url:" + txtCompanySiteUrl.Text + "<br/>Subject: " + ddlSubject.SelectedItem.Text + "<br/> Contact No. " + txtContactNo.Text + "<br/> Office Contact:" + txtOfficeExtn.Text + "<br />Email: " + txtEmail.Text; ;
+        message.TextBody = "Name: " + txtName.Text + "<br/> Company:" + txtCompany.Text + "<br/> Company Site Url:" + txtCompanySiteUrl.Text + "<br/>Subject: " + ddlSubject.SelectedItem.Text + "<br/> Contact No. " + txtContactNo.Text + "<br/> Office Contact:" + txtOfficeExtn.Text + " " + txtExtn.Text+ "<br />Email: " + txtEmail.Text; ;
 
         BusinessLogic objBusinessLogic = new BusinessLogic();
-        bool blnResult = objBusinessLogic.AddNewScheduleDemoRequest(txtName.Text, txtCompany.Text, txtCompanySiteUrl.Text, ddlSubject.SelectedItem.Text, Convert.ToInt32(txtContactNo.Text), Convert.ToInt32(txtOfficeExtn.Text), txtEmail.Text);
+        bool blnResult = objBusinessLogic.AddNewScheduleDemoRequest(txtName.Text, txtCompany.Text, txtCompanySiteUrl.Text, ddlSubject.SelectedItem.Text, Convert.ToInt32(txtContactNo.Text), Convert.ToInt32(txtOfficeExtn.Text + txtExtn.Text), txtEmail.Text);
 
         // Send message.
         message.Send();

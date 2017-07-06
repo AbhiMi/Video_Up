@@ -63,7 +63,6 @@
     <form id="form1" runat="server">
         <div id="example">
 
-            <telerik:RadScriptManager runat="server" ID="RadSciptManager1" />
             <div id="window">
                 <ul class="fieldlist">
                     <li>

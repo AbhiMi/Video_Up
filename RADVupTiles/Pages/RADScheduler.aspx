@@ -5,7 +5,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
-    <telerik:RadScriptManager ID="RadScriptManager1" runat="server" />
     <telerik:RadSkinManager ID="RadSkinManager1" runat="server"></telerik:RadSkinManager>
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>

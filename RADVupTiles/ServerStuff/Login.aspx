@@ -113,7 +113,6 @@
                     <div class="content clearfix">
                         <div class="left">
                             <form class="clearfix" runat="server" id="LoginForm">
-                                <telerik:RadScriptManager ID="RadScriptManager1" runat="server"></telerik:RadScriptManager>
                                 <asp:HiddenField runat="server" ID="hdnIsPostback" value="<%=Page.IsPostBack.ToString()%>" />
                                 <table class="loginContent">
                                     <tr>

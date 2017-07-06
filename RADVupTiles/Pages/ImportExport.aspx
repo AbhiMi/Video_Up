@@ -550,7 +550,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <telerik:RadScriptManager runat="server" ID="RadScriptManager1" />
 
         <%-- <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="up1">
             <ProgressTemplate>

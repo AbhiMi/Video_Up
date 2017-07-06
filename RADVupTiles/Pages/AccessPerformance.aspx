@@ -537,7 +537,6 @@
         <div style="float: left; width: 65%" class="RADCycle">
             <div class="swMain" id="wizard" style="margin-top: 20px">
                 <div>
-                    <telerik:RadScriptManager runat="server" ID="RadScriptManager1" />
                     <telerik:RadSkinManager ID="RadSkinManager1" runat="server" ShowChooser="true" />
                     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server" OnAjaxRequest="RadAjaxManager1_AjaxRequest">
                         <AjaxSettings>

@@ -673,7 +673,6 @@
         <div style="float: left; width: 65%" class="RADCycle">
             <div class="swMain" id="wizard" style="margin-top: 20px">
                 <div>
-                    <telerik:RadScriptManager runat="server" ID="RadScriptManager1" />
                     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
                         <AjaxSettings>
                             <telerik:AjaxSetting AjaxControlID="ConfiguratorPanel1">

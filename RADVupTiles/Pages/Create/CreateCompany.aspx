@@ -685,7 +685,6 @@
     </telerik:RadCodeBlock>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
-    <asp:ScriptManager runat="server" ID="sc1"></asp:ScriptManager>
     <div class="bg-text" data-bg-text="Company">
     </div>
     <table style="margin-left: 390px">

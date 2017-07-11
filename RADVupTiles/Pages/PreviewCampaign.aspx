@@ -673,7 +673,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
-    <asp:ager runat="server" ID="sc1"></asp:ager>
+<%--    <asp:ager runat="server" ID="sc1"></asp:ager>--%>
     <div class="bg-text" data-bg-text="Publish">
     </div>
     <asp:UpdatePanel runat="server" ID="UpdatePanel2" UpdateMode="Always">

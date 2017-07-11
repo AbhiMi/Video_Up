@@ -171,7 +171,6 @@
     </script>
 </head>
 <body>
-    <button id="myBtn" onclick="showModal()">Schedule Demo</button>
     <form runat="server">
         <div id="navbar" class="navbar navbar-fixed-top navbar-inverse">
             <div class="navbar-inner">

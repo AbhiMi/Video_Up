@@ -376,7 +376,7 @@ select {
         }
 
 #footer {
-    /*position: absolute;*/
+    position: absolute;
     background-color: black;
     color: #FFFFFF;
     top: 600px;

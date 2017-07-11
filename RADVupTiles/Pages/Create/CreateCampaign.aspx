@@ -446,9 +446,9 @@
 
         .bg-text {
             position: relative;
-            margin-left: 375px;
+            margin-left: 380px;
             z-index: -1;
-            margin-top: -60px;
+            margin-top: 0px;
         }
 
             .bg-text::after {
@@ -519,7 +519,7 @@
             background: transparent;
             display: table;
             table-layout: fixed;
-            margin-top: 330px !important;
+            margin-top: 360px !important;
             margin-left: -370px !important;
         }
 
@@ -749,7 +749,7 @@
     <%--<asp:SiteMapPath ID="SiteMap1" runat="server" CssClass="SiteMap" PathSeparator=" "  />--%>
 
     <div style="width: 95%">
-        <div style="float: left; margin: -20px 0 0 25px">
+        <div style="float: left; margin: 0px 0 0 25px">
             <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"
                 width="350" height="350   ">
                 <%-- in the value below line give the path of the folder in which you are storing the .swf file& bind the datalist with the colum name of the database with eval function --%>

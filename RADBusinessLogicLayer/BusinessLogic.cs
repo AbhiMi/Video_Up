@@ -18,7 +18,7 @@ namespace RADBusinessLogicLayer
         public bool AddNewScheduleDemoRequest(string strName, string strCompany, string strCompanySiteUrl, string strSubject, int intContactNo, int intOfficeContact, string strEmail)
         {
             DataAccesLayer objDataAccesLayer = new DataAccesLayer();
-            return objDataAccesLayer.AddNewScheduleDemoRequest(strName,strCompany,strCompanySiteUrl,strSubject,intContactNo, intOfficeContact,strEmail);
+            return objDataAccesLayer.AddNewScheduleDemoRequest(strName, strCompany, strCompanySiteUrl, strSubject, intContactNo, intOfficeContact, strEmail);
         }
         public DataTable GetMedia(int companyID)
         {
@@ -52,8 +52,8 @@ namespace RADBusinessLogicLayer
             return objDataAccesLayer.GetUserStatus(companyId);
         }
 
-        public bool UpdateUserStatus(string userId, bool isLocked,string roleId)
-        { 
+        public bool UpdateUserStatus(string userId, bool isLocked, string roleId)
+        {
             DataAccesLayer objDataAccesLayer = new DataAccesLayer();
             return objDataAccesLayer.UpdateUserStatus(userId, isLocked, roleId);
         }
@@ -409,7 +409,7 @@ namespace RADBusinessLogicLayer
         public bool CreateRegions(string strRegionName, string strDescription, string strCreatedBy, int intCompanyID)
         {
             DataAccesLayer objDataAccessLayer = new DataAccesLayer();
-            return objDataAccessLayer.CreateRegions(strRegionName,strDescription,strCreatedBy ,intCompanyID);
+            return objDataAccessLayer.CreateRegions(strRegionName, strDescription, strCreatedBy, intCompanyID);
         }
         public DataTable GetRoleWithDescription(string RoleName)
         {
@@ -557,6 +557,16 @@ namespace RADBusinessLogicLayer
         {
             DataAccesLayer objDataAccesLayer = new DataAccesLayer();
             return objDataAccesLayer.GetLocations(CompanyID);
+        }
+        public bool CreateVUPMACAddress(int companyID, string vupID, string strEthernetMACAddress, string strWirelessMACAddress)
+        {
+            DataAccesLayer objDataAccesLayer = new DataAccesLayer();
+            return objDataAccesLayer.CreateVUPMACAddress(companyID, vupID, strEthernetMACAddress, strWirelessMACAddress);
+        }
+        public DataTable GetVUPMACAddresses(int CompanyID)
+        {
+            DataAccesLayer objDataAccesLayer = new DataAccesLayer();
+            return objDataAccesLayer.GetVUPMACAddresses(CompanyID);
         }
     }
 }

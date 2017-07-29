@@ -2485,5 +2485,59 @@ namespace RADDataAccessLayer
             }
             return dtResults;
         }
-    }
+        public bool CreateVUPMACAddress(int companyID, string vupID, string strEthernetMACAddress, string strWirelessMACAddress)
+        {
+            bool result = false;
+            try
+            {
+                using (SqlConnection objSqlConn = SQLBase.GetConnection())
+                {
+                    using (SqlCommand objSqlcmd = new SqlCommand("SP_InsertVUPMACAddresses", objSqlConn))
+                    {
+                        objSqlcmd.CommandType = CommandType.StoredProcedure;
+
+                        objSqlcmd.Parameters.Add("@CompanyID", SqlDbType.Int).Value = companyID;
+                        objSqlcmd.Parameters.Add("@VideoUp_ID", SqlDbType.NVarChar).Value = vupID;
+                        objSqlcmd.Parameters.Add("@EthernetMACAddress", SqlDbType.NVarChar).Value = strEthernetMACAddress;
+                        objSqlcmd.Parameters.Add("@WirelessMACAddress", SqlDbType.NVarChar).Value = strWirelessMACAddress;
+
+                        result = objSqlcmd.ExecuteNonQuery() < 0;
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+
+            }
+            return result;
+        }
+        public DataTable GetVUPMACAddresses(int CompanyID)
+        {
+            DataTable dtResults = null;
+            try
+            {
+                using (SqlConnection objSqlConn = SQLBase.GetConnection())
+                {
+                    using (SqlCommand objSqlcmd = new SqlCommand("SP_GetVUPMACAddresses", objSqlConn))
+                    {
+                        objSqlcmd.CommandType = CommandType.StoredProcedure;
+                        objSqlcmd.Parameters.Add("@CompanyID", SqlDbType.Int).Value = CompanyID;
+                        dtResults = new DataTable();
+                        dtResults.Load(objSqlcmd.ExecuteReader());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return dtResults;
+        }
+
+    }   
 }

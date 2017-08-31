@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
+using System.Data;
 
 public partial class Pages_AddNewArea : System.Web.UI.Page
 {
@@ -37,5 +39,16 @@ public partial class Pages_AddNewArea : System.Web.UI.Page
             lblCreateAreaStatus.ForeColor = Color.Red;
             lblCreateAreaStatus.Text = "Operation Failed. Please Contact Administrator.";
         }
+    }
+
+    protected void btnGenerate_Click(object sender, EventArgs e)
+    {
+        RADDataAccessLayer.DataAccesLayer dal = new RADDataAccessLayer.DataAccesLayer();
+        DataTable dt= dal.GetVUPMACAddresses(txtInput.Text);
+
+        byte[] bytes = (byte[])(dt.Rows[0]["QRCodeImage"]);
+        string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+        imgQRCode.ImageUrl = "data:image/png;base64," + base64String;
+        
     }
 }

@@ -20,6 +20,12 @@
   <wsdl:message name="IService1_GetVUPMACAddresses_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetVUPMACAddressesResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_DeleteVUPMACAddresses_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteVUPMACAddresses" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteVUPMACAddresses_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteVUPMACAddressesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="CreateVUPMACAddress">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateVUPMACAddress" message="tns:IService1_CreateVUPMACAddress_InputMessage" />
@@ -28,6 +34,10 @@
     <wsdl:operation name="GetVUPMACAddresses">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetVUPMACAddresses" message="tns:IService1_GetVUPMACAddresses_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetVUPMACAddressesResponse" message="tns:IService1_GetVUPMACAddresses_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteVUPMACAddresses">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteVUPMACAddresses" message="tns:IService1_DeleteVUPMACAddresses_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteVUPMACAddressesResponse" message="tns:IService1_DeleteVUPMACAddresses_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -43,6 +53,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetVUPMACAddresses">
       <soap:operation soapAction="http://tempuri.org/IService1/GetVUPMACAddresses" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteVUPMACAddresses">
+      <soap:operation soapAction="http://tempuri.org/IService1/DeleteVUPMACAddresses" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

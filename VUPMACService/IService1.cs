@@ -19,7 +19,10 @@ namespace VUPMACService
         bool CreateVUPMACAddress(int companyID, string vupID, string strEthernetMACAddress, string strWirelessMACAddress);
 
         [OperationContract]
-        VUPMacAddressesDetails GetVUPMACAddresses(int CompanyID);
+        VUPMacAddressesDetails GetVUPMACAddresses(string strVideoUpID);
+
+        [OperationContract]
+        bool DeleteVUPMACAddresses(int CompanyID);
 
         // TODO: Add your service operations here
     }

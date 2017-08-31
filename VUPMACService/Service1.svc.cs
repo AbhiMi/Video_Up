@@ -8,6 +8,9 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.IO;
+using System.Drawing;
+using QRCoder;
 
 namespace VUPMACService
 {
@@ -16,7 +19,7 @@ namespace VUPMACService
     public class Service1 : IService1
     {
 
-        public VUPMacAddressesDetails GetVUPMACAddresses(int CompanyID)
+        public VUPMacAddressesDetails GetVUPMACAddresses(string strVideoUpID)
         {
             DataTable dtResults = null;
             VUPMacAddressesDetails vadetails = new VUPMacAddressesDetails();
@@ -27,7 +30,7 @@ namespace VUPMACService
                     using (SqlCommand objSqlcmd = new SqlCommand("SP_GetVUPMACAddresses", objSqlConn))
                     {
                         objSqlcmd.CommandType = CommandType.StoredProcedure;
-                        objSqlcmd.Parameters.Add("@CompanyID", SqlDbType.Int).Value = CompanyID;
+                        objSqlcmd.Parameters.Add("@VideoUpID", SqlDbType.NVarChar).Value = strVideoUpID;
                         dtResults = new DataTable();
                         dtResults.TableName = "VUPMACAddresses";
                         dtResults.Load(objSqlcmd.ExecuteReader());
@@ -57,7 +60,36 @@ namespace VUPMACService
                         objSqlcmd.Parameters.Add("@VideoUp_ID", SqlDbType.NVarChar).Value = vupID;
                         objSqlcmd.Parameters.Add("@EthernetMACAddress", SqlDbType.NVarChar).Value = strEthernetMACAddress;
                         objSqlcmd.Parameters.Add("@WirelessMACAddress", SqlDbType.NVarChar).Value = strWirelessMACAddress;
+                        MemoryStream ms = GenerateQRCode(vupID);
+                        objSqlcmd.Parameters.Add("@BarcodeImage", SqlDbType.Image, ms.GetBuffer().Length).Value = ms.GetBuffer(); 
 
+                        result = objSqlcmd.ExecuteNonQuery() < 0;
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+
+            }
+            return result;
+        }
+        public bool DeleteVUPMACAddresses(int companyID)
+        {
+            bool result = false;
+            try
+            {
+                using (SqlConnection objSqlConn = GetConnection())
+                {
+                    using (SqlCommand objSqlcmd = new SqlCommand("SP_DeleteVUPMACAddress", objSqlConn))
+                    {
+                        objSqlcmd.CommandType = CommandType.StoredProcedure;
+
+                        objSqlcmd.Parameters.Add("@CompanyID", SqlDbType.Int).Value = companyID;
                         result = objSqlcmd.ExecuteNonQuery() < 0;
 
                     }
@@ -95,6 +127,24 @@ namespace VUPMACService
                 throw;
             }
             return con;
+        }
+        public MemoryStream GenerateQRCode(string strVideoUpID)
+        {
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeGenerator.QRCode qrCode = qrGenerator.CreateQrCode(strVideoUpID, QRCodeGenerator.ECCLevel.Q);
+            System.Web.UI.WebControls.Image imgBarCode = new System.Web.UI.WebControls.Image();
+            imgBarCode.Height = 150;
+            imgBarCode.Width = 150;
+            using (Bitmap bitMap = qrCode.GetGraphic(20))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    bitMap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    return ms;
+                    //imgBarCode.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(byteImage);
+                    //string result = Convert.ToBase64String(byteImage, 0, byteImage.Length);
+                }
+            }
         }
     }
 }

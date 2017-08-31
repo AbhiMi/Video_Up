@@ -2516,7 +2516,7 @@ namespace RADDataAccessLayer
             }
             return result;
         }
-        public DataTable GetVUPMACAddresses(int CompanyID)
+        public DataTable GetVUPMACAddresses(string strVideoUpID)
         {
             DataTable dtResults = null;
             try
@@ -2526,7 +2526,7 @@ namespace RADDataAccessLayer
                     using (SqlCommand objSqlcmd = new SqlCommand("SP_GetVUPMACAddresses", objSqlConn))
                     {
                         objSqlcmd.CommandType = CommandType.StoredProcedure;
-                        objSqlcmd.Parameters.Add("@CompanyID", SqlDbType.Int).Value = CompanyID;
+                        objSqlcmd.Parameters.Add("@VideoUpID", SqlDbType.NVarChar).Value = strVideoUpID;
                         dtResults = new DataTable();
                         dtResults.Load(objSqlcmd.ExecuteReader());
                     }

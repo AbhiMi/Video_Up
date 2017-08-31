@@ -563,10 +563,10 @@ namespace RADBusinessLogicLayer
             DataAccesLayer objDataAccesLayer = new DataAccesLayer();
             return objDataAccesLayer.CreateVUPMACAddress(companyID, vupID, strEthernetMACAddress, strWirelessMACAddress);
         }
-        public DataTable GetVUPMACAddresses(int CompanyID)
+        public DataTable GetVUPMACAddresses(string strVideoUPID)
         {
             DataAccesLayer objDataAccesLayer = new DataAccesLayer();
-            return objDataAccesLayer.GetVUPMACAddresses(CompanyID);
+            return objDataAccesLayer.GetVUPMACAddresses(strVideoUPID);
         }
     }
 }

@@ -69,10 +69,16 @@ namespace TestVUPService.VUPMACAddress_ServiceReference {
         System.Threading.Tasks.Task<bool> CreateVUPMACAddressAsync(int companyID, string vupID, string strEthernetMACAddress, string strWirelessMACAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetVUPMACAddresses", ReplyAction="http://tempuri.org/IService1/GetVUPMACAddressesResponse")]
-        TestVUPService.VUPMACAddress_ServiceReference.VUPMacAddressesDetails GetVUPMACAddresses(int CompanyID);
+        TestVUPService.VUPMACAddress_ServiceReference.VUPMacAddressesDetails GetVUPMACAddresses(string strVideoUpID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetVUPMACAddresses", ReplyAction="http://tempuri.org/IService1/GetVUPMACAddressesResponse")]
-        System.Threading.Tasks.Task<TestVUPService.VUPMACAddress_ServiceReference.VUPMacAddressesDetails> GetVUPMACAddressesAsync(int CompanyID);
+        System.Threading.Tasks.Task<TestVUPService.VUPMACAddress_ServiceReference.VUPMacAddressesDetails> GetVUPMACAddressesAsync(string strVideoUpID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteVUPMACAddresses", ReplyAction="http://tempuri.org/IService1/DeleteVUPMACAddressesResponse")]
+        bool DeleteVUPMACAddresses(int CompanyID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteVUPMACAddresses", ReplyAction="http://tempuri.org/IService1/DeleteVUPMACAddressesResponse")]
+        System.Threading.Tasks.Task<bool> DeleteVUPMACAddressesAsync(int CompanyID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -110,12 +116,20 @@ namespace TestVUPService.VUPMACAddress_ServiceReference {
             return base.Channel.CreateVUPMACAddressAsync(companyID, vupID, strEthernetMACAddress, strWirelessMACAddress);
         }
         
-        public TestVUPService.VUPMACAddress_ServiceReference.VUPMacAddressesDetails GetVUPMACAddresses(int CompanyID) {
-            return base.Channel.GetVUPMACAddresses(CompanyID);
+        public TestVUPService.VUPMACAddress_ServiceReference.VUPMacAddressesDetails GetVUPMACAddresses(string strVideoUpID) {
+            return base.Channel.GetVUPMACAddresses(strVideoUpID);
         }
         
-        public System.Threading.Tasks.Task<TestVUPService.VUPMACAddress_ServiceReference.VUPMacAddressesDetails> GetVUPMACAddressesAsync(int CompanyID) {
-            return base.Channel.GetVUPMACAddressesAsync(CompanyID);
+        public System.Threading.Tasks.Task<TestVUPService.VUPMACAddress_ServiceReference.VUPMacAddressesDetails> GetVUPMACAddressesAsync(string strVideoUpID) {
+            return base.Channel.GetVUPMACAddressesAsync(strVideoUpID);
+        }
+        
+        public bool DeleteVUPMACAddresses(int CompanyID) {
+            return base.Channel.DeleteVUPMACAddresses(CompanyID);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteVUPMACAddressesAsync(int CompanyID) {
+            return base.Channel.DeleteVUPMACAddressesAsync(CompanyID);
         }
     }
 }

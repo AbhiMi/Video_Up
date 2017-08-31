@@ -532,28 +532,36 @@
         .RadGrid_Default .rgRow a, .RadGrid_Default .rgAltRow a, .RadGrid_Default .rgFooter a, .RadGrid_Default .rgEditForm a, .RadGrid_Default .rgEditRow a, .RadGrid_Default .rgHoveredRow a {
             text-decoration: underline;
         }
+
         .RadWindow.rwShadow {
             box-shadow: 0 1px 4px #ef7c31;
         }
+
         .RadWindow_Default {
             border-color: #ef7c31 !important;
         }
-        .RadWindow_Default .rwTitleBar {
-        background-image: linear-gradient(#ef7c31,#ef7c31) !important;
-    }
+
+            .RadWindow_Default .rwTitleBar {
+                background-image: linear-gradient(#ef7c31,#ef7c31) !important;
+            }
+
         h6.rwTitle {
-        color: #FFFFFF !important;
-    }
-        .RadWindow .rwTitleWrapper .rwTitle{
-            font-size:1.2em !important; 
+            color: #FFFFFF !important;
         }
+
+        .RadWindow .rwTitleWrapper .rwTitle {
+            font-size: 1.2em !important;
+        }
+
         .rwStatusBar {
-    background-color: #ef7c31 !important;
-    border-color: #ef7c31 !important;
-}
-        .RadWindow .rwStatusBar input{
-            color:#FFFFFF !important;
+            background-color: #ef7c31 !important;
+            border-color: #ef7c31 !important;
         }
+
+        .RadWindow .rwStatusBar input {
+            color: #FFFFFF !important;
+        }
+
         .rrHandle {
             background-color: #ef7c31 !important;
         }
@@ -561,7 +569,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div style="float: left; position: relative; background-repeat: repeat; margin:20px">
+        <div style="float: left; position: relative; background-repeat: repeat; margin: 20px">
             <table id="tblRegion" runat="server">
                 <tr>
                     <td style="padding-right: 20px; padding-top: 2px;">
@@ -571,7 +579,7 @@
                         <asp:TextBox ID="txtCreateArea" runat="server" />
                     </td>
                 </tr>
-                 <tr>
+                <tr>
                     <td style="padding-right: 20px; padding-top: 2px;">
                         <asp:Label ID="lblRegion" Text="Region:" runat="server" CssClass="label" />
                     </td>
@@ -588,6 +596,16 @@
                 <tr>
                     <td>
                         <asp:Label ID="lblCreateAreaStatus" runat="server" Visible="false" Font-Bold="true" />
+                    </td>
+                </tr>
+            </table>
+            <table style="margin-top:100px">
+                <tr>
+                    <td>
+                        <asp:TextBox ID="txtInput" runat="server"></asp:TextBox>
+                        <asp:Button ID="btnGenerate" runat="server" Text="GetQRCode" OnClick="btnGenerate_Click" />
+                        <hr />
+                        <asp:Image ID="imgQRCode" runat="server" Width="200px" Height="200px" />
                     </td>
                 </tr>
             </table>

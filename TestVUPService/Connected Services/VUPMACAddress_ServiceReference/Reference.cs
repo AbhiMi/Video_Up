@@ -63,10 +63,10 @@ namespace TestVUPService.VUPMACAddress_ServiceReference {
     public interface IService1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateVUPMACAddress", ReplyAction="http://tempuri.org/IService1/CreateVUPMACAddressResponse")]
-        bool CreateVUPMACAddress(int companyID, string vupID, string strEthernetMACAddress, string strWirelessMACAddress);
+        bool CreateVUPMACAddress(int RADDeviceID, string VideoUpID, System.Guid HardwareID1, System.Guid HardwareID2, int companyID, string strEthernetMACAddress, string strWirelessMACAddress, int IsActive, int FlipDisplay);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateVUPMACAddress", ReplyAction="http://tempuri.org/IService1/CreateVUPMACAddressResponse")]
-        System.Threading.Tasks.Task<bool> CreateVUPMACAddressAsync(int companyID, string vupID, string strEthernetMACAddress, string strWirelessMACAddress);
+        System.Threading.Tasks.Task<bool> CreateVUPMACAddressAsync(int RADDeviceID, string VideoUpID, System.Guid HardwareID1, System.Guid HardwareID2, int companyID, string strEthernetMACAddress, string strWirelessMACAddress, int IsActive, int FlipDisplay);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetVUPMACAddresses", ReplyAction="http://tempuri.org/IService1/GetVUPMACAddressesResponse")]
         TestVUPService.VUPMACAddress_ServiceReference.VUPMacAddressesDetails GetVUPMACAddresses(string strVideoUpID);
@@ -108,12 +108,12 @@ namespace TestVUPService.VUPMACAddress_ServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public bool CreateVUPMACAddress(int companyID, string vupID, string strEthernetMACAddress, string strWirelessMACAddress) {
-            return base.Channel.CreateVUPMACAddress(companyID, vupID, strEthernetMACAddress, strWirelessMACAddress);
+        public bool CreateVUPMACAddress(int RADDeviceID, string VideoUpID, System.Guid HardwareID1, System.Guid HardwareID2, int companyID, string strEthernetMACAddress, string strWirelessMACAddress, int IsActive, int FlipDisplay) {
+            return base.Channel.CreateVUPMACAddress(RADDeviceID, VideoUpID, HardwareID1, HardwareID2, companyID, strEthernetMACAddress, strWirelessMACAddress, IsActive, FlipDisplay);
         }
         
-        public System.Threading.Tasks.Task<bool> CreateVUPMACAddressAsync(int companyID, string vupID, string strEthernetMACAddress, string strWirelessMACAddress) {
-            return base.Channel.CreateVUPMACAddressAsync(companyID, vupID, strEthernetMACAddress, strWirelessMACAddress);
+        public System.Threading.Tasks.Task<bool> CreateVUPMACAddressAsync(int RADDeviceID, string VideoUpID, System.Guid HardwareID1, System.Guid HardwareID2, int companyID, string strEthernetMACAddress, string strWirelessMACAddress, int IsActive, int FlipDisplay) {
+            return base.Channel.CreateVUPMACAddressAsync(RADDeviceID, VideoUpID, HardwareID1, HardwareID2, companyID, strEthernetMACAddress, strWirelessMACAddress, IsActive, FlipDisplay);
         }
         
         public TestVUPService.VUPMACAddress_ServiceReference.VUPMacAddressesDetails GetVUPMACAddresses(string strVideoUpID) {

@@ -539,7 +539,7 @@ namespace RADDataAccessLayer
             }
             return result;
         }
-        public bool InsertRADDeviceInfo(string strRADDeviceName, string strRADDeviceDesc, int companyID)
+        public bool InsertRADDeviceInfo(string strRADDeviceName, string strRADDeviceDesc, int companyID,string strScreenFlip,string strScreenOrientation)
         {
             bool result = false;
             try
@@ -552,6 +552,8 @@ namespace RADDataAccessLayer
 
                         objSqlcmd.Parameters.Add("@DeviceInfo", SqlDbType.VarChar).Value = strRADDeviceName;
                         objSqlcmd.Parameters.Add("@Description", SqlDbType.VarChar).Value = strRADDeviceDesc;
+                        objSqlcmd.Parameters.Add("@ScreenFlip", SqlDbType.VarChar).Value = strScreenFlip;
+                        objSqlcmd.Parameters.Add("@ScreenOrientation", SqlDbType.VarChar).Value = strScreenOrientation;
                         objSqlcmd.Parameters.Add("@CompanyID", SqlDbType.Int).Value = companyID;
 
                         result = objSqlcmd.ExecuteNonQuery() < 0;

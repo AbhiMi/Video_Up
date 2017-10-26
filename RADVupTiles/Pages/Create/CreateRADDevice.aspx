@@ -31,6 +31,9 @@
         #footer, #footer a {
             width: 100%;
         }
+        .Grid th a {
+            color:#000000 !important;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
@@ -56,6 +59,31 @@
                 </td>
                 <td style="border: 1px solid black">
                     <asp:TextBox ID="txtRADDeviceInfo" runat="server" TextMode="MultiLine" Height="50px" Width="200px" />
+                </td>
+            </tr>
+            <tr style="padding: 22px 20px 20px 0px">
+                <td style="border: 1px solid black">
+                    <asp:Label ID="lblScreenFlip" runat="server" Text="Screen Flip:" CssClass="label" />
+                </td>
+                <td style="border: 1px solid black">
+                    <asp:DropDownList ID="ddlScreenFlip" runat="server">
+                        <asp:ListItem Text="None" Value="None" />
+                        <asp:ListItem Text="Horizontal" Value="Horizontal" />
+                        <asp:ListItem Text="Vertical" Value="Vertical" />
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr style="padding: 22px 20px 20px 0px">
+                <td style="border: 1px solid black">
+                    <asp:Label ID="lblScreenOrientation" runat="server" Text="Screen Orientation:" CssClass="label" />
+                </td>
+                <td style="border: 1px solid black">
+                    <asp:DropDownList ID="ddlScreenOrientation" runat="server">
+                        <asp:ListItem Text="0 degrees" Value="0 degrees" />
+                        <asp:ListItem Text="90 degrees" Value="90 degrees" />
+                        <asp:ListItem Text="180 degrees" Value="180 degrees" />
+                        <asp:ListItem Text="360 degrees" Value="360 degrees" />
+                    </asp:DropDownList>
                 </td>
             </tr>
             <tr style="padding: 22px 20px 20px 0px">
@@ -105,10 +133,10 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="RAD Device Name">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblDeviceInfo" runat="server" Text='<%#Eval("DeviceInfo") %>' />
+                                        <asp:Label ID="lblDeviceInfo" runat="server" Text='<%#Eval("Name") %>' />
                                     </ItemTemplate>
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="txtDeviceInfo" Width="200px" runat="server" Text='<%#Eval("DeviceInfo") %>' />
+                                        <asp:TextBox ID="txtDeviceInfo" Width="200px" runat="server" Text='<%#Eval("Name") %>' />
                                     </EditItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Description">

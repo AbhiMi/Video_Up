@@ -16,7 +16,8 @@ namespace VUPMACService
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "CreateVUPMACAddress")]
-        bool CreateVUPMACAddress(int companyID, string vupID, string strEthernetMACAddress, string strWirelessMACAddress);
+        bool CreateVUPMACAddress(int RADDeviceID, string VideoUpID, Guid HardwareID1, Guid HardwareID2, int companyID, string strEthernetMACAddress, string strWirelessMACAddress, int IsActive, int FlipDisplay);
+
 
         [OperationContract]
         VUPMacAddressesDetails GetVUPMACAddresses(string strVideoUpID);

@@ -131,10 +131,10 @@ namespace RADBusinessLogicLayer
             DataAccesLayer objDataAccesLayer = new DataAccesLayer();
             return objDataAccesLayer.CreateCompany(strCompanyName, intCompanyCode);
         }
-        public bool InsertRADDeviceInfo(string strRADDeviceName, string strRADDeviceDesc, int companyID)
+        public bool InsertRADDeviceInfo(string strRADDeviceName, string strRADDeviceDesc, int companyID,string strScreenFlip,string strScreenOrientation)
         {
             DataAccesLayer objDataAccesLayer = new DataAccesLayer();
-            return objDataAccesLayer.InsertRADDeviceInfo(strRADDeviceName, strRADDeviceDesc, companyID);
+            return objDataAccesLayer.InsertRADDeviceInfo(strRADDeviceName, strRADDeviceDesc, companyID,strScreenFlip,strScreenOrientation);
         }
         public DataTable GetUserWithRole(int companyID)
         {

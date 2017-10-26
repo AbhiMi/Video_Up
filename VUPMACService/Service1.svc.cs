@@ -45,7 +45,7 @@ namespace VUPMACService
             return vadetails;
         }
 
-        public bool CreateVUPMACAddress(int companyID, string vupID, string strEthernetMACAddress, string strWirelessMACAddress)
+        public bool CreateVUPMACAddress(int RADDeviceID,string VideoUpID, Guid HardwareID1, Guid HardwareID2, int companyID, string strEthernetMACAddress, string strWirelessMACAddress,int IsActive, int FlipDisplay)
         {
             bool result = false;
             try
@@ -56,13 +56,17 @@ namespace VUPMACService
                     {
                         objSqlcmd.CommandType = CommandType.StoredProcedure;
 
+                        objSqlcmd.Parameters.Add("@RADDeviceID", SqlDbType.Int).Value = RADDeviceID;
+                        objSqlcmd.Parameters.Add("@VideoUpID", SqlDbType.NVarChar).Value = VideoUpID;
+                        objSqlcmd.Parameters.Add("@HardwareID1", SqlDbType.UniqueIdentifier).Value = HardwareID1;
+                        objSqlcmd.Parameters.Add("@HardwareID2", SqlDbType.UniqueIdentifier).Value = HardwareID2;
                         objSqlcmd.Parameters.Add("@CompanyID", SqlDbType.Int).Value = companyID;
-                        objSqlcmd.Parameters.Add("@VideoUp_ID", SqlDbType.NVarChar).Value = vupID;
                         objSqlcmd.Parameters.Add("@EthernetMACAddress", SqlDbType.NVarChar).Value = strEthernetMACAddress;
                         objSqlcmd.Parameters.Add("@WirelessMACAddress", SqlDbType.NVarChar).Value = strWirelessMACAddress;
-                        MemoryStream ms = GenerateQRCode(vupID);
-                        objSqlcmd.Parameters.Add("@BarcodeImage", SqlDbType.Image, ms.GetBuffer().Length).Value = ms.GetBuffer(); 
-
+                        objSqlcmd.Parameters.Add("@IsActive", SqlDbType.Int).Value = IsActive;
+                        MemoryStream ms = GenerateQRCode(VideoUpID);
+                        objSqlcmd.Parameters.Add("@QRcodeImage", SqlDbType.Image, ms.GetBuffer().Length).Value = ms.GetBuffer();
+                        objSqlcmd.Parameters.Add("@FlipDisplay", SqlDbType.Int).Value = FlipDisplay;
                         result = objSqlcmd.ExecuteNonQuery() < 0;
 
                     }

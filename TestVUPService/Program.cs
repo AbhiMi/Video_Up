@@ -18,7 +18,7 @@ namespace TestVUPService
             reference.ClientCredentials.UserName.Password = "vup@123";
             reference.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode =
                        X509CertificateValidationMode.None;
-            bool result = reference.CreateVUPMACAddress(4, "VideoUp1112200", "XX-00-00-00-00-44", "AA-00-00-00-00-55");
+            bool result = reference.CreateVUPMACAddress(1003, "VideoUp1004", Guid.NewGuid(), Guid.NewGuid(),42, "XX-00-WW-DD-EE", "XX-00-WW-DD-EE",1,180);
             bool isDeleted = reference.DeleteVUPMACAddresses(2);
             var dt=reference.GetVUPMACAddresses("VideoUp1007");
             foreach (DataRow row in dt.VUPMacAddresseses.Rows)

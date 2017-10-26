@@ -81,7 +81,7 @@ public partial class Pages_CreateRADDevice : System.Web.UI.Page
         if (!string.IsNullOrEmpty(txtRADDeviceName.Text) && !string.IsNullOrEmpty(txtRADDeviceInfo.Text))
         {
             BusinessLogic objBusinessLogic = new BusinessLogic();
-            blnResult = objBusinessLogic.InsertRADDeviceInfo(txtRADDeviceName.Text, txtRADDeviceInfo.Text, GetUsersCompanyID());
+            blnResult = objBusinessLogic.InsertRADDeviceInfo(txtRADDeviceName.Text, txtRADDeviceInfo.Text, GetUsersCompanyID(), ddlScreenFlip.SelectedItem.Text, ddlScreenOrientation.SelectedItem.Text);
             //blnAsscteResult = objBusinessLogic.AssociateRADDeviceToCompany(Convert.ToInt32(ddlCompanies.SelectedValue), txtRADDeviceName.Text);
             if (blnResult)
             {
